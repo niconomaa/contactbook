@@ -1,2 +1,2 @@
-# contactbook
+# contactbook 🦠
 You're infected!
