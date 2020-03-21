@@ -2,13 +2,55 @@ import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
+// import * as Contacts from 'expo-contacts';
+import { selectContactPhone } from 'react-native-select-contact';
+
 
 import { MonoText } from '../components/StyledText';
 
 export default function HomeScreen() {
+
+  [hasContactPermissions, setContactPermissions] = React.useState(false);
+  [contacts, setContacts] = React.useState([]);
+
+  // React.useEffect(() => {
+  //   (async () => {
+  //     const { status } = await Contacts.requestPermissionsAsync();
+  //     if (status === 'granted') {
+  //       setContactPermissions(true);
+  //       const { data } = await Contacts.getContactsAsync({
+  //       });
+
+  //       if (data.length > 0) {
+  //         setContacts(data);
+  //         console.log(data);
+  //       }
+  //     }
+  //   })();
+  // }, []);
+
+  React.useEffect(() => {
+   console.log(getPhoneNumber());
+  }, []);
+
+  function getPhoneNumber() {
+    return selectContactPhone()
+        .then(selection => {
+            if (!selection) {
+                return null;
+            }
+            
+            let { contact, selectedPhone } = selection;
+            console.log(`Selected ${selectedPhone.type} phone number ${selectedPhone.number} from ${contact.name}`);
+            return selectedPhone.number;
+        });  
+}
+
+  
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+
         <View style={styles.welcomeContainer}>
           <Text>TEST</Text>
         </View>
