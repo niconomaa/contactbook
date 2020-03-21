@@ -6,9 +6,14 @@ import {
   Text,
   TouchableOpacity,
   View,
+  PermissionsAndroid,
+  Button
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
+// import * as Contacts from 'expo-contacts';
+import { selectContactPhone } from 'react-native-select-contact';
+
 import * as SMS from 'expo-sms';
 
 import { MonoText } from '../components/StyledText';
@@ -67,21 +72,77 @@ async function sendSMS() {
 }
 
 export default function HomeScreen() {
+
+  [hasContactPermissions, setContactPermissions] = React.useState(false);
+  [contacts, setContacts] = React.useState([]);
+
+  let onAdd = () => {
+    requestContactsPermission();
+    console.log(hasContactPermissions);
+    if(hasContactPermissions){
+      getPhoneNumber();
+    }
+  };
+
+  async function requestContactsPermission() {
+    if (Platform.OS === 'android'){
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+          {
+            title: 'Contactbook Contacts Permission',
+            message:
+              'Contactbook needs access to your contacts ' +
+              'so you can add them to your contactlist.',
+            buttonNeutral: 'Ask Me Later',
+            buttonNegative: 'Cancel',
+            buttonPositive: 'OK',
+          },
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          setContactPermissions(true);
+        } else {
+          setContactPermissions(false);
+        }
+      } catch (err) {
+        console.warn(err);
+      }
+    } else {
+      setContactPermissions(true);
+    }
+  }
+
+  function getPhoneNumber() {
+    return selectContactPhone()
+        .then(selection => {
+            if (!selection) {
+                return null;
+            }
+
+            let { contact, selectedPhone } = selection;
+            console.log(`Selected ${selectedPhone.type} phone number ${selectedPhone.number} from ${contact.name}`);
+            return selectedPhone.number;
+        });
+  }
+
   // sendSMS();
   const { loadingMyself, error, data } = useQuery(GET_MYSELF);
 
   if (loadingMyself) return <Text>loading</Text>;
   console.log(data);
-
   return (
     <View style={styles.container}>
       {/* <Text>{data}</Text> */}
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
-      >
+      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+
         <View style={styles.welcomeContainer}>
           <Text>TEST</Text>
+          <Button
+            title="Kontaktperson hinzufügen"
+            color="#f194ff"
+            onPress={onAdd}>
+
+          </Button>
         </View>
 
         <View style={styles.getStartedContainer}>
@@ -125,7 +186,7 @@ export default function HomeScreen() {
           </MonoText>
         </View>
       </View>
-    </View>
+      </View>    
   );
 }
 

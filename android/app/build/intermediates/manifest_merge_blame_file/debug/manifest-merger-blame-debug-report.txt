@@ -1,0 +1,1213 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.contactbook.contactbook"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="28" />
+9-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml
+10
+11    <permission
+11-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:7:3-9:42
+12        android:name="com.contactbook.contactbook.permission.C2D_MESSAGE"
+12-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:8:5-70
+13        android:protectionLevel="signature" />
+13-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:9:5-40
+14
+15    <!-- These are required permissions to make the app run -->
+16    <uses-permission android:name="com.contactbook.contactbook.permission.C2D_MESSAGE" />
+16-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:12:3-88
+16-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:12:20-85
+17    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+17-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:13:3-80
+17-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:13:20-77
+18    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+18-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:14:3-77
+18-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:14:20-74
+19    <uses-permission android:name="android.permission.INTERNET" />
+19-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:15:3-65
+19-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:15:20-62
+20    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+20-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:16:3-76
+20-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:16:20-73
+21    <uses-permission android:name="android.permission.WAKE_LOCK" />
+21-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:17:3-66
+21-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:17:20-63
+22    <uses-permission android:name="android.permission.READ_CONTACTS" />
+22-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:18:3-70
+22-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:18:20-67
+23
+24    <!-- ADD PERMISSIONS HERE -->
+25
+26
+27    <!-- BEGIN OPTIONAL PERMISSIONS -->
+28    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
+28-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:24:3-73
+28-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:24:20-70
+29    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+29-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:25:3-78
+29-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:25:20-75
+30    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+30-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:26:3-73
+30-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:26:20-70
+31    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+31-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:27:3-72
+31-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:27:20-69
+32    <uses-permission android:name="android.permission.VIBRATE" />
+32-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:28:3-64
+32-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:28:20-61
+33    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+33-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:29:3-86
+33-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:29:20-83
+34    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+34-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:30:3-78
+34-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:30:20-75
+35
+36    <!-- These require runtime permissions on M -->
+37    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+37-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:33:3-79
+37-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:33:20-76
+38    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+38-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:34:3-77
+38-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:34:20-74
+39    <uses-permission android:name="android.permission.CAMERA" />
+39-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:35:3-63
+39-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:35:20-60
+40    <uses-permission android:name="android.permission.READ_CONTACTS" />
+40-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:18:3-70
+40-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:18:20-67
+41    <uses-permission android:name="android.permission.READ_CALENDAR" />
+41-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:37:3-70
+41-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:37:20-67
+42    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+42-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:38:3-71
+42-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:38:20-68
+43    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+43-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:39:3-78
+43-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:39:20-75
+44    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+44-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:40:3-69
+44-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:40:20-66
+45    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+45-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:41:3-79
+45-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:41:20-76
+46    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+46-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:42:3-71
+46-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:42:20-68
+47    <!-- END OPTIONAL PERMISSIONS -->
+48
+49
+50    <!-- ADD TEST PERMISSIONS HERE -->
+51
+52    <uses-feature
+52-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:47:3-77
+53        android:glEsVersion="0x00020000"
+53-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:47:17-49
+54        android:required="true" />
+54-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:47:50-74
+55    <uses-feature
+55-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:48:3-85
+56        android:name="android.software.leanback"
+56-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:48:17-57
+57        android:required="false" />
+57-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:48:58-82
+58    <uses-feature
+58-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:49:3-88
+59        android:name="android.hardware.touchscreen"
+59-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:49:17-60
+60        android:required="false" />
+60-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:49:61-85
+61
+62    <!-- WHEN_VERSIONING_REMOVE_FROM_HERE -->
+63    <supports-screens
+63-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:13:5-19:24
+64        android:anyDensity="true"
+64-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:14:9-34
+65        android:largeScreens="true"
+65-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:15:9-36
+66        android:normalScreens="true"
+66-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:16:9-37
+67        android:smallScreens="true"
+67-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:17:9-36
+68        android:xlargeScreens="true" >
+68-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:18:9-37
+69    </supports-screens>
+70
+71    <uses-permission android:name="host.exp.exponent.permission.C2D_MESSAGE" /> <!-- Used by react-native-netinfo module -->
+71-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:26:5-80
+71-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:26:22-77
+72    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+72-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:34:5-76
+72-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:34:22-73
+73
+74    <uses-feature
+74-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:47:5-49:36
+75        android:name="android.hardware.camera"
+75-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:48:9-47
+76        android:required="false" />
+76-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:49:9-33
+77    <uses-feature
+77-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:50:5-52:36
+78        android:name="android.hardware.camera.autofocus"
+78-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:51:9-57
+79        android:required="false" />
+79-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:52:9-33
+80    <uses-feature
+80-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:53:5-55:36
+81        android:name="android.hardware.location"
+81-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:54:9-49
+82        android:required="false" />
+82-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:55:9-33
+83    <uses-feature
+83-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:56:5-58:36
+84        android:name="android.hardware.location.gps"
+84-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:57:9-53
+85        android:required="false" />
+85-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:58:9-33
+86    <uses-feature
+86-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:59:5-61:36
+87        android:name="android.hardware.location.network"
+87-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:60:9-57
+88        android:required="false" />
+88-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:61:9-33
+89    <uses-feature
+89-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:62:5-64:36
+90        android:name="android.hardware.wifi"
+90-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:63:9-45
+91        android:required="false" />
+91-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:64:9-33
+92    <uses-feature
+92-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:65:5-67:36
+93        android:name="android.hardware.microphone"
+93-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:66:9-51
+94        android:required="false" />
+94-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:67:9-33
+95    <uses-feature
+95-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:68:5-70:36
+96        android:name="android.hardware.telephony"
+96-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:69:9-50
+97        android:required="false" />
+97-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:70:9-33
+98    <uses-feature
+98-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:71:5-73:36
+99        android:name="android.hardware.bluetooth"
+99-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:72:9-50
+100        android:required="false" />
+100-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:73:9-33
+101
+102    <uses-permission android:name="android.permission.STORAGE" />
+102-->[:expo-file-system] /Users/jonas/Projects/contactbook/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:5-66
+102-->[:expo-file-system] /Users/jonas/Projects/contactbook/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:22-63
+103    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- for android -->
+103-->[:expo-location] /Users/jonas/Projects/contactbook/node_modules/expo-location/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:5-77
+103-->[:expo-location] /Users/jonas/Projects/contactbook/node_modules/expo-location/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:22-74
+104    <!-- <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/> -->
+105    <!-- <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS"/> -->
+106    <!-- <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" /> -->
+107    <!-- <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" /> -->
+108    <!-- for Samsung -->
+109    <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
+109-->[me.leolin:ShortcutBadger:1.1.4] /Users/jonas/.gradle/caches/transforms-2/files-2.1/dd44d6dca430fddc25756188e590b806/ShortcutBadger-1.1.4/AndroidManifest.xml:19:5-86
+109-->[me.leolin:ShortcutBadger:1.1.4] /Users/jonas/.gradle/caches/transforms-2/files-2.1/dd44d6dca430fddc25756188e590b806/ShortcutBadger-1.1.4/AndroidManifest.xml:19:22-83
+110    <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" /> <!-- for htc -->
+110-->[me.leolin:ShortcutBadger:1.1.4] /Users/jonas/.gradle/caches/transforms-2/files-2.1/dd44d6dca430fddc25756188e590b806/ShortcutBadger-1.1.4/AndroidManifest.xml:20:5-87
+110-->[me.leolin:ShortcutBadger:1.1.4] /Users/jonas/.gradle/caches/transforms-2/files-2.1/dd44d6dca430fddc25756188e590b806/ShortcutBadger-1.1.4/AndroidManifest.xml:20:22-84
+111    <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" />
+111-->[me.leolin:ShortcutBadger:1.1.4] /Users/jonas/.gradle/caches/transforms-2/files-2.1/dd44d6dca430fddc25756188e590b806/ShortcutBadger-1.1.4/AndroidManifest.xml:23:5-81
+111-->[me.leolin:ShortcutBadger:1.1.4] /Users/jonas/.gradle/caches/transforms-2/files-2.1/dd44d6dca430fddc25756188e590b806/ShortcutBadger-1.1.4/AndroidManifest.xml:23:22-78
+112    <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT" /> <!-- for sony -->
+112-->[me.leolin:ShortcutBadger:1.1.4] /Users/jonas/.gradle/caches/transforms-2/files-2.1/dd44d6dca430fddc25756188e590b806/ShortcutBadger-1.1.4/AndroidManifest.xml:24:5-83
+112-->[me.leolin:ShortcutBadger:1.1.4] /Users/jonas/.gradle/caches/transforms-2/files-2.1/dd44d6dca430fddc25756188e590b806/ShortcutBadger-1.1.4/AndroidManifest.xml:24:22-80
+113    <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE" /> <!-- for apex -->
+113-->[me.leolin:ShortcutBadger:1.1.4] /Users/jonas/.gradle/caches/transforms-2/files-2.1/dd44d6dca430fddc25756188e590b806/ShortcutBadger-1.1.4/AndroidManifest.xml:27:5-88
+113-->[me.leolin:ShortcutBadger:1.1.4] /Users/jonas/.gradle/caches/transforms-2/files-2.1/dd44d6dca430fddc25756188e590b806/ShortcutBadger-1.1.4/AndroidManifest.xml:27:22-85
+114    <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT" /> <!-- for solid -->
+114-->[me.leolin:ShortcutBadger:1.1.4] /Users/jonas/.gradle/caches/transforms-2/files-2.1/dd44d6dca430fddc25756188e590b806/ShortcutBadger-1.1.4/AndroidManifest.xml:30:5-84
+114-->[me.leolin:ShortcutBadger:1.1.4] /Users/jonas/.gradle/caches/transforms-2/files-2.1/dd44d6dca430fddc25756188e590b806/ShortcutBadger-1.1.4/AndroidManifest.xml:30:22-81
+115    <uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE" />
+115-->[me.leolin:ShortcutBadger:1.1.4] /Users/jonas/.gradle/caches/transforms-2/files-2.1/dd44d6dca430fddc25756188e590b806/ShortcutBadger-1.1.4/AndroidManifest.xml:33:5-83
+115-->[me.leolin:ShortcutBadger:1.1.4] /Users/jonas/.gradle/caches/transforms-2/files-2.1/dd44d6dca430fddc25756188e590b806/ShortcutBadger-1.1.4/AndroidManifest.xml:33:22-80
+116    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+116-->[io.nlopez.smartlocation:library:3.2.11] /Users/jonas/.gradle/caches/transforms-2/files-2.1/927fecac4bfafda759549cfe77d30586/jetified-library-3.2.11/AndroidManifest.xml:15:5-98
+116-->[io.nlopez.smartlocation:library:3.2.11] /Users/jonas/.gradle/caches/transforms-2/files-2.1/927fecac4bfafda759549cfe77d30586/jetified-library-3.2.11/AndroidManifest.xml:15:22-95
+117    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
+117-->[io.nlopez.smartlocation:library:3.2.11] /Users/jonas/.gradle/caches/transforms-2/files-2.1/927fecac4bfafda759549cfe77d30586/jetified-library-3.2.11/AndroidManifest.xml:16:5-94
+117-->[io.nlopez.smartlocation:library:3.2.11] /Users/jonas/.gradle/caches/transforms-2/files-2.1/927fecac4bfafda759549cfe77d30586/jetified-library-3.2.11/AndroidManifest.xml:16:22-91
+118    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+118-->[com.google.android.gms:play-services-measurement:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/16427b5f1aa46de6339ab5668e291c66/jetified-play-services-measurement-16.5.0/AndroidManifest.xml:26:5-110
+118-->[com.google.android.gms:play-services-measurement:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/16427b5f1aa46de6339ab5668e291c66/jetified-play-services-measurement-16.5.0/AndroidManifest.xml:26:22-107
+119
+120    <application
+120-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:51:3-363:17
+121        android:name="host.exp.exponent.MainApplication"
+121-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:52:5-36
+122        android:allowBackup="true"
+122-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:53:5-31
+123        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+123-->[androidx.core:core:1.1.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/37791d22cdf73b5c35c92eb9addd3f27/core-1.1.0/AndroidManifest.xml:24:18-86
+124        android:debuggable="true"
+125        android:icon="@mipmap/ic_launcher"
+125-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:54:5-39
+126        android:label="@string/app_name"
+126-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:55:5-37
+127        android:largeHeap="true"
+127-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:56:5-29
+128        android:supportsRtl="true"
+128-->[com.facebook.android:facebook-android-sdk:5.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/36d8e97a0dea5ca0c54825784f11758c/facebook-android-sdk-5.0.1/AndroidManifest.xml:28:18-44
+129        android:testOnly="true"
+130        android:usesCleartextTraffic="true" >
+130-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:57:5-40
+131        <activity
+131-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:59:5-64:16
+132            android:name="host.exp.exponent.LauncherActivity"
+132-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:60:7-39
+133            android:exported="true"
+133-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:61:7-30
+134            android:launchMode="singleTask"
+134-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:62:7-38
+135            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+135-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:63:7-66
+136        </activity>
+137        <activity
+137-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:66:5-71:16
+138            android:name="host.exp.exponent.experience.ExperienceActivity"
+138-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:67:7-52
+139            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+139-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:68:7-77
+140            android:theme="@style/Theme.Exponent.Light"
+140-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:69:7-50
+141            android:windowSoftInputMode="adjustResize" >
+141-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:70:7-49
+142        </activity>
+143        <activity
+143-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:73:5-93:16
+144            android:name="host.exp.exponent.MainActivity"
+144-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:74:7-35
+145            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+145-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:76:7-77
+146            android:launchMode="singleTask"
+146-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:75:7-38
+147            android:theme="@style/Theme.Exponent.Splash"
+147-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:77:7-51
+148            android:windowSoftInputMode="adjustResize" >
+148-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:78:7-49
+149            <intent-filter>
+149-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:79:7-86:23
+150                <data android:scheme="myapp" />
+150-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:80:9-39
+150-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:80:15-37
+151
+152                <action android:name="android.intent.action.VIEW" />
+152-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:82:9-60
+152-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:82:17-58
+153
+154                <category android:name="android.intent.category.DEFAULT" />
+154-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:84:9-67
+154-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:84:19-65
+155                <category android:name="android.intent.category.BROWSABLE" />
+155-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:85:9-69
+155-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:85:19-67
+156            </intent-filter>
+157            <intent-filter>
+157-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:87:7-91:23
+158                <action android:name="android.intent.action.MAIN" />
+158-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:88:9-60
+158-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:88:17-58
+159
+160                <category android:name="android.intent.category.LAUNCHER" />
+160-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:90:9-68
+160-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:90:19-66
+161            </intent-filter>
+162            <!-- ADD DETACH APP SPECIFIC INTENT FILTERS -->
+163        </activity>
+164        <activity
+164-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:95:5-101:16
+165            android:name="host.exp.exponent.experience.HomeActivity"
+165-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:96:7-46
+166            android:label="@string/app_name"
+166-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:97:7-39
+167            android:launchMode="singleTask"
+167-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:98:7-38
+168            android:screenOrientation="portrait"
+168-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:99:7-43
+169            android:theme="@style/Theme.Exponent.Light" >
+169-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:100:7-50
+170        </activity>
+171        <activity
+171-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:103:5-112:15
+172            android:name="host.exp.exponent.experience.TvActivity"
+172-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:104:7-44
+173            android:label="@string/app_name"
+173-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:105:7-39
+174            android:screenOrientation="landscape"
+174-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:107:7-44
+175            android:theme="@style/Theme.Exponent.Light" >
+175-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:106:7-50
+176            <intent-filter>
+176-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:108:6-111:22
+177                <action android:name="android.intent.action.MAIN" />
+177-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:88:9-60
+177-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:88:17-58
+178
+179                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+179-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:110:8-77
+179-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:110:18-74
+180            </intent-filter>
+181        </activity>
+182        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+182-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:116:5-81
+182-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:116:15-79
+183        <!-- WHEN_PREPARING_SHELL_REMOVE_FROM_HERE -->
+184        <!-- ADD DEV SETTINGS HERE -->
+185        <!-- BEGIN_SDK_36 -->
+186        <activity android:name="abi36_0_0.com.facebook.react.devsupport.DevSettingsActivity" />
+186-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:120:5-91
+186-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:120:15-89
+187        <!-- END_SDK_36 -->
+188        <!-- BEGIN_SDK_35 -->
+189        <activity android:name="abi35_0_0.com.facebook.react.devsupport.DevSettingsActivity" />
+189-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:123:5-91
+189-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:123:15-89
+190        <!-- END_SDK_35 -->
+191        <!-- BEGIN_SDK_34 -->
+192        <activity android:name="abi34_0_0.com.facebook.react.devsupport.DevSettingsActivity" />
+192-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:126:5-91
+192-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:126:15-89
+193        <!-- END_SDK_34 -->
+194        <!-- BEGIN_SDK_33 -->
+195        <activity android:name="abi33_0_0.com.facebook.react.devsupport.DevSettingsActivity" />
+195-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:129:5-91
+195-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:129:15-89
+196        <!-- END_SDK_33 -->
+197        <!-- WHEN_PREPARING_SHELL_REMOVE_TO_HERE -->
+198
+199        <activity android:name="net.openid.appauth.RedirectUriReceiverActivity" >
+199-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:133:5-142:16
+199-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:134:9-70
+200            <intent-filter>
+200-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:136:7-141:23
+201                <action android:name="android.intent.action.VIEW" />
+201-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:82:9-60
+201-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:82:17-58
+202
+203                <category android:name="android.intent.category.DEFAULT" />
+203-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:84:9-67
+203-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:84:19-65
+204                <category android:name="android.intent.category.BROWSABLE" />
+204-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:85:9-69
+204-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:85:19-67
+205
+206                <data
+206-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:80:9-39
+207                    android:path="oauthredirect"
+207-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:140:60-88
+208                    android:scheme="com.contactbook.contactbook" />
+208-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:80:15-37
+209            </intent-filter>
+210        </activity>
+211
+212        <!-- START OF STRIPE SCHEMES -->
+213        <activity
+213-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:145:5-156:16
+214            android:name="expo.modules.payments.stripe.RedirectUriReceiver"
+214-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:148:9-72
+215            android:exported="true"
+215-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:146:9-32
+216            android:launchMode="singleTask"
+216-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:147:9-40
+217            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
+217-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:149:9-79
+218            <intent-filter>
+218-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:150:9-155:25
+219                <action android:name="android.intent.action.VIEW" />
+219-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:82:9-60
+219-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:82:17-58
+220
+221                <category android:name="android.intent.category.DEFAULT" />
+221-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:84:9-67
+221-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:84:19-65
+222                <category android:name="android.intent.category.BROWSABLE" />
+222-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:85:9-69
+222-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:85:19-67
+223
+224                <data android:scheme="expo.modules.payments.stripe.f2c8a9f3-f812-4ffe-bd24-c91d2d61187b" />
+224-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:80:9-39
+224-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:80:15-37
+225            </intent-filter>
+226        </activity>
+227        <!-- Versioned Activity for Stripe -->
+228        <!-- BEGIN_SDK_36 -->
+229        <activity
+229-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:159:5-170:16
+230            android:name="abi36_0_0.expo.modules.payments.stripe.RedirectUriReceiver"
+230-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:162:7-80
+231            android:exported="true"
+231-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:160:7-30
+232            android:launchMode="singleTask"
+232-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:161:7-38
+233            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
+233-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:163:7-77
+234            <intent-filter>
+234-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:164:7-169:23
+235                <action android:name="android.intent.action.VIEW" />
+235-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:82:9-60
+235-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:82:17-58
+236
+237                <category android:name="android.intent.category.DEFAULT" />
+237-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:84:9-67
+237-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:84:19-65
+238                <category android:name="android.intent.category.BROWSABLE" />
+238-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:85:9-69
+238-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:85:19-67
+239
+240                <data android:scheme="abi36_0_0.expo.modules.payments.stripe" />
+240-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:80:9-39
+240-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:80:15-37
+241            </intent-filter>
+242        </activity>
+243        <!-- END_SDK_36 -->
+244        <!-- BEGIN_SDK_35 -->
+245        <activity
+245-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:173:3-184:14
+246            android:name="abi35_0_0.expo.modules.payments.stripe.RedirectUriReceiver"
+246-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:176:4-77
+247            android:exported="true"
+247-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:174:4-27
+248            android:launchMode="singleTask"
+248-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:175:4-35
+249            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
+249-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:177:4-74
+250            <intent-filter>
+250-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:178:4-183:20
+251                <action android:name="android.intent.action.VIEW" />
+251-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:82:9-60
+251-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:82:17-58
+252
+253                <category android:name="android.intent.category.DEFAULT" />
+253-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:84:9-67
+253-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:84:19-65
+254                <category android:name="android.intent.category.BROWSABLE" />
+254-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:85:9-69
+254-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:85:19-67
+255
+256                <data android:scheme="abi35_0_0.expo.modules.payments.stripe" />
+256-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:80:9-39
+256-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:80:15-37
+257            </intent-filter>
+258        </activity>
+259        <!-- END_SDK_35 -->
+260        <!-- BEGIN_SDK_34 -->
+261        <activity
+261-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:187:5-198:16
+262            android:name="abi34_0_0.expo.modules.payments.stripe.RedirectUriReceiver"
+262-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:190:7-80
+263            android:exported="true"
+263-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:188:7-30
+264            android:launchMode="singleTask"
+264-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:189:7-38
+265            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
+265-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:191:7-77
+266            <intent-filter>
+266-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:192:7-197:23
+267                <action android:name="android.intent.action.VIEW" />
+267-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:82:9-60
+267-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:82:17-58
+268
+269                <category android:name="android.intent.category.DEFAULT" />
+269-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:84:9-67
+269-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:84:19-65
+270                <category android:name="android.intent.category.BROWSABLE" />
+270-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:85:9-69
+270-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:85:19-67
+271
+272                <data android:scheme="abi34_0_0.expo.modules.payments.stripe" />
+272-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:80:9-39
+272-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:80:15-37
+273            </intent-filter>
+274        </activity>
+275        <!-- END_SDK_34 -->
+276        <!-- BEGIN_SDK_33 -->
+277        <activity
+277-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:201:5-212:16
+278            android:name="abi33_0_0.expo.modules.payments.stripe.RedirectUriReceiver"
+278-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:204:7-80
+279            android:exported="true"
+279-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:202:7-30
+280            android:launchMode="singleTask"
+280-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:203:7-38
+281            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
+281-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:205:7-77
+282            <intent-filter>
+282-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:206:7-211:23
+283                <action android:name="android.intent.action.VIEW" />
+283-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:82:9-60
+283-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:82:17-58
+284
+285                <category android:name="android.intent.category.DEFAULT" />
+285-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:84:9-67
+285-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:84:19-65
+286                <category android:name="android.intent.category.BROWSABLE" />
+286-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:85:9-69
+286-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:85:19-67
+287
+288                <data android:scheme="abi33_0_0.expo.modules.payments.stripe" />
+288-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:80:9-39
+288-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:80:15-37
+289            </intent-filter>
+290        </activity>
+291        <!-- END_SDK_33 -->
+292        <!-- END OF STRIPE SCHEMES -->
+293
+294        <activity
+294-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:216:5-220:16
+295            android:name="host.exp.exponent.experience.ErrorActivity"
+295-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:217:7-47
+296            android:screenOrientation="portrait"
+296-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:219:7-43
+297            android:theme="@style/Theme.Exponent.Dark" >
+297-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:218:7-49
+298        </activity>
+299        <activity
+299-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:222:5-226:16
+300            android:name="host.exp.exponent.experience.InfoActivity"
+300-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:223:7-46
+301            android:screenOrientation="portrait"
+301-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:224:7-43
+302            android:theme="@style/Theme.Exponent.Light" >
+302-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:225:7-50
+303        </activity>
+304        <activity
+304-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:228:5-233:39
+305            android:name="com.facebook.FacebookActivity"
+305-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:229:7-51
+306            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+306-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:230:7-90
+307            android:label="@string/app_name"
+307-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:231:7-39
+308            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+308-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:232:7-66
+309        <activity
+309-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:235:5-239:69
+310            android:name="com.facebook.ads.InterstitialAdActivity"
+310-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:236:7-61
+311            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+311-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:237:7-90
+312            android:label="@string/app_name"
+312-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:238:7-39
+313            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+313-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:239:7-66
+314
+315        <service
+315-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:241:5-243:34
+316            android:name="host.exp.exponent.ExponentIntentService"
+316-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:242:7-44
+317            android:exported="false" />
+317-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:243:7-31
+318
+319        <!-- Analytics -->
+320        <receiver
+320-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:246:5-252:16
+321            android:name="host.exp.exponent.referrer.InstallReferrerReceiver"
+321-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:247:7-72
+322            android:exported="true" >
+322-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:248:7-30
+323            <intent-filter>
+323-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:249:7-251:23
+324                <action android:name="com.android.vending.INSTALL_REFERRER" />
+324-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:250:9-71
+324-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:250:17-68
+325            </intent-filter>
+326        </receiver>
+327
+328        <!--
+329    This crashes: https://code.google.com/p/analytics-issues/issues/detail?id=667
+330    TODO: turn it back on when it's fixed
+331    <service
+332      android:name="com.google.android.gms.analytics.CampaignTrackingService"
+333      android:enabled="true"
+334      android:exported="false" />
+335        -->
+336
+337        <receiver
+337-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:262:5-267:16
+338            android:name="com.google.android.gms.analytics.AnalyticsReceiver"
+338-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:262:15-80
+339            android:enabled="true"
+339-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:263:15-37
+340            android:exported="false" >
+340-->[com.google.android.gms:play-services-analytics:16.0.8] /Users/jonas/.gradle/caches/transforms-2/files-2.1/f412f821f4ed624127ef2f62edc1579b/jetified-play-services-analytics-16.0.8/AndroidManifest.xml:33:13-37
+341            <intent-filter>
+341-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:264:7-266:23
+342                <action android:name="com.google.android.gms.analytics.ANALYTICS_DISPATCH" />
+342-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:265:9-86
+342-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:265:17-83
+343            </intent-filter>
+344        </receiver>
+345
+346        <service
+346-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:269:5-271:40
+347            android:name="com.google.android.gms.analytics.AnalyticsService"
+347-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:269:14-78
+348            android:enabled="true"
+348-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:270:14-36
+349            android:exported="false" />
+349-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:271:14-38
+350
+351        <!-- GCM -->
+352        <receiver
+352-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:274:5-284:16
+353            android:name="com.google.android.gms.gcm.GcmReceiver"
+353-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:275:7-60
+354            android:exported="true"
+354-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:276:7-30
+355            android:permission="com.google.android.c2dm.permission.SEND" >
+355-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:277:7-67
+356            <intent-filter>
+356-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:278:7-283:23
+357                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+357-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:279:9-72
+357-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:279:17-70
+358                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+358-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:280:9-77
+358-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:280:17-75
+359
+360                <category android:name="com.contactbook.contactbook" />
+360-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:282:9-63
+360-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:282:19-61
+361            </intent-filter>
+362        </receiver>
+363
+364        <service
+364-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:286:5-292:15
+365            android:name="host.exp.exponent.gcm.ExponentGcmListenerService"
+365-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:287:7-53
+366            android:exported="false" >
+366-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:288:7-31
+367            <intent-filter>
+367-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:289:7-291:23
+368                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+368-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:279:9-72
+368-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:279:17-70
+369            </intent-filter>
+370        </service>
+371        <service
+371-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:293:5-299:15
+372            android:name="host.exp.exponent.gcm.ExponentInstanceIDListenerService"
+372-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:294:7-60
+373            android:exported="false" >
+373-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:295:7-31
+374            <intent-filter>
+374-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:296:7-298:23
+375                <action android:name="com.google.android.gms.iid.InstanceID" />
+375-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:297:9-71
+375-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:297:17-69
+376            </intent-filter>
+377        </service>
+378        <service
+378-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:300:5-303:15
+379            android:name="host.exp.exponent.gcm.GcmRegistrationIntentService"
+379-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:301:7-55
+380            android:exported="false" >
+380-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:302:7-31
+381        </service>
+382
+383        <!-- FCM -->
+384        <service android:name="host.exp.exponent.fcm.ExpoFcmMessagingService" >
+384-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:306:5-311:15
+384-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:307:7-50
+385            <intent-filter>
+385-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:308:7-310:23
+386                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+386-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:309:9-69
+386-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:309:17-67
+387            </intent-filter>
+388        </service>
+389
+390        <meta-data
+390-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:312:5-314:62
+391            android:name="com.google.firebase.messaging.default_notification_icon"
+391-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:313:7-77
+392            android:resource="@drawable/shell_notification_icon" />
+392-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:314:7-59
+393        <meta-data
+393-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:315:5-317:47
+394            android:name="com.google.firebase.messaging.default_notification_color"
+394-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:316:7-78
+395            android:resource="@color/colorAccent" />
+395-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:317:7-44
+396
+397        <service
+397-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:318:5-321:15
+398            android:name="host.exp.exponent.fcm.FcmRegistrationIntentService"
+398-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:319:7-55
+399            android:exported="false" >
+399-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:320:7-31
+400        </service>
+401
+402        <!-- ImagePicker native module -->
+403        <activity
+403-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:324:5-327:16
+404            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+404-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:325:7-70
+405            android:theme="@style/Base.Theme.AppCompat" >
+405-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:326:7-50
+406        </activity>
+407
+408        <!-- ADD FABRIC CONFIG HERE -->
+409        <!-- BEGIN FABRIC CONFIG -->
+410        <meta-data
+410-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:332:5-334:65
+411            android:name="io.fabric.ApiKey"
+411-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:333:7-38
+412            android:value="a25fafe9f9edee11a9882b32e0cd7a26df6e2c42" />
+412-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:334:7-63
+413        <!-- END FABRIC CONFIG -->
+414
+415
+416        <!-- ADD GOOGLE MAPS CONFIG HERE -->
+417        <!-- BEGIN GOOGLE MAPS CONFIG -->
+418        <meta-data
+418-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:339:5-341:64
+419            android:name="com.google.android.geo.API_KEY"
+419-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:340:7-52
+420            android:value="AIzaSyDh7eDB9snEFSYtf-k0gfxA45HFoR0L--I" />
+420-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:341:7-62
+421        <!-- END GOOGLE MAPS CONFIG -->
+422
+423
+424        <!-- ADD GOOGLE MOBILE ADS CONFIG HERE -->
+425        <!-- BEGIN GOOGLE MOBILE ADS CONFIG -->
+426        <meta-data
+426-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:346:5-348:63
+427            android:name="com.google.android.gms.ads.APPLICATION_ID"
+427-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:347:7-63
+428            android:value="ca-app-pub-3940256099942544~3347511713" />
+428-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:348:7-61
+429        <meta-data
+429-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:349:5-107
+430            android:name="com.google.android.gms.ads.DELAY_APP_MEASUREMENT_INIT"
+430-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:349:16-84
+431            android:value="true" />
+431-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:349:85-105
+432        <!-- END GOOGLE MOBILE ADS CONFIG -->
+433
+434
+435        <!-- ADD BRANCH CONFIG HERE -->
+436
+437
+438        <!-- ADD FACEBOOK APP ID CONFIG HERE -->
+439        <!-- ADD FACEBOOK APP DISPLAY NAME CONFIG HERE -->
+440        <!-- Tags below need to be in one line with no whitespace after android:value -->
+441        <!-- in order for XDL to be able to replace values in them -->
+442        <meta-data
+442-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:358:5-95
+443            android:name="com.facebook.sdk.AutoLogAppEventsEnabled"
+443-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:358:16-71
+444            android:value="false" />
+444-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:358:72-93
+445        <meta-data
+445-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:359:5-87
+446            android:name="com.facebook.sdk.AutoInitEnabled"
+446-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:359:16-63
+447            android:value="false" />
+447-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:359:64-85
+448        <meta-data
+448-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:360:5-101
+449            android:name="com.facebook.sdk.AdvertiserIDCollectionEnabled"
+449-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:360:16-77
+450            android:value="false" />
+450-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:360:78-99
+451        <meta-data
+451-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:362:5-109
+452            android:name="standaloneStripeScheme"
+452-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:362:16-53
+453            android:value="f2c8a9f3-f812-4ffe-bd24-c91d2d61187b" />
+453-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:362:54-106
+454        <!-- WHEN_VERSIONING_REMOVE_FROM_HERE -->
+455        <!-- Scheduled notifications -->
+456        <receiver
+456-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:79:9-81:40
+457            android:name="host.exp.exponent.notifications.ScheduledNotificationReceiver"
+457-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:80:13-89
+458            android:exported="false" />
+458-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:81:13-37
+459        <receiver
+459-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:82:9-92:20
+460            android:name="host.exp.exponent.notifications.receivers.SchedulingTriggerReceiver"
+460-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:83:13-95
+461            android:exported="true" >
+461-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:84:13-36
+462            <intent-filter>
+462-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:85:13-91:29
+463                <action android:name="android.intent.action.REBOOT" />
+463-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:86:17-71
+463-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:86:25-68
+464                <action android:name="android.intent.action.BOOT_COMPLETED" />
+464-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:87:17-79
+464-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:87:25-76
+465                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+465-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:88:17-81
+465-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:88:25-78
+466                <action android:name="android.intent.action.TIME_CHANGED" />
+466-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:89:17-77
+466-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:89:25-74
+467                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+467-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:90:17-82
+467-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:90:25-79
+468            </intent-filter>
+469        </receiver> <!-- WHEN_VERSIONING_REMOVE_TO_HERE -->
+470        <provider
+470-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:96:9-104:20
+471            android:name="androidx.core.content.FileProvider"
+471-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:97:13-62
+472            android:authorities="com.contactbook.contactbook.provider"
+472-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:98:13-60
+473            android:exported="false"
+473-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:99:13-37
+474            android:grantUriPermissions="true" >
+474-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:100:13-47
+475            <meta-data
+475-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:101:13-103:58
+476                android:name="android.support.FILE_PROVIDER_PATHS"
+476-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:102:17-67
+477                android:resource="@xml/provider_paths" />
+477-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:103:17-55
+478        </provider>
+479        <provider
+479-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:105:9-113:20
+480            android:name="versioned.host.exp.exponent.modules.api.components.webview.RNCWebViewFileProvider"
+480-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:106:13-109
+481            android:authorities="com.contactbook.contactbook.fileprovider"
+481-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:107:13-64
+482            android:exported="false"
+482-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:108:13-37
+483            android:grantUriPermissions="true" >
+483-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:109:13-47
+484            <meta-data
+484-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:101:13-103:58
+485                android:name="android.support.FILE_PROVIDER_PATHS"
+485-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:102:17-67
+486                android:resource="@xml/provider_paths" />
+486-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:103:17-55
+487        </provider>
+488        <provider
+488-->[:expo-file-system] /Users/jonas/Projects/contactbook/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:18:9-27:20
+489            android:name="expo.modules.filesystem.FileSystemFileProvider"
+489-->[:expo-file-system] /Users/jonas/Projects/contactbook/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:19:13-74
+490            android:authorities="com.contactbook.contactbook.FileSystemFileProvider"
+490-->[:expo-file-system] /Users/jonas/Projects/contactbook/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:20:13-74
+491            android:exported="false"
+491-->[:expo-file-system] /Users/jonas/Projects/contactbook/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:21:13-37
+492            android:grantUriPermissions="true" >
+492-->[:expo-file-system] /Users/jonas/Projects/contactbook/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:22:13-47
+493            <meta-data
+493-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:101:13-103:58
+494                android:name="android.support.FILE_PROVIDER_PATHS"
+494-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:102:17-67
+495                android:resource="@xml/file_system_provider_paths" />
+495-->[host.exp.exponent:expoview:36.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6fcbc246a29c77a89d7e23de7fa64893/expoview-36.0.0/AndroidManifest.xml:103:17-55
+496        </provider>
+497
+498        <service
+498-->[:expo-location] /Users/jonas/Projects/contactbook/node_modules/expo-location/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:16:9-18:40
+499            android:name="expo.modules.location.services.LocationTaskService"
+499-->[:expo-location] /Users/jonas/Projects/contactbook/node_modules/expo-location/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:13-78
+500            android:exported="false" />
+500-->[:expo-location] /Users/jonas/Projects/contactbook/node_modules/expo-location/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:18:13-37
+501
+502        <activity android:name="com.facebook.CustomTabMainActivity" />
+502-->[com.facebook.android:facebook-common:5.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/351261b9f83f15266e11cb4e679d9b71/jetified-facebook-common-5.0.1/AndroidManifest.xml:33:9-71
+502-->[com.facebook.android:facebook-common:5.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/351261b9f83f15266e11cb4e679d9b71/jetified-facebook-common-5.0.1/AndroidManifest.xml:33:19-68
+503        <activity android:name="com.facebook.CustomTabActivity" />
+503-->[com.facebook.android:facebook-common:5.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/351261b9f83f15266e11cb4e679d9b71/jetified-facebook-common-5.0.1/AndroidManifest.xml:34:9-67
+503-->[com.facebook.android:facebook-common:5.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/351261b9f83f15266e11cb4e679d9b71/jetified-facebook-common-5.0.1/AndroidManifest.xml:34:19-64
+504        <activity
+504-->[com.facebook.android:audience-network-sdk:5.1.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/61694bedd9c940fadb3b529d326284d1/jetified-audience-network-sdk-5.1.1/AndroidManifest.xml:15:9-18:40
+505            android:name="com.facebook.ads.AudienceNetworkActivity"
+505-->[com.facebook.android:audience-network-sdk:5.1.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/61694bedd9c940fadb3b529d326284d1/jetified-audience-network-sdk-5.1.1/AndroidManifest.xml:16:13-68
+506            android:configChanges="keyboardHidden|orientation|screenSize"
+506-->[com.facebook.android:audience-network-sdk:5.1.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/61694bedd9c940fadb3b529d326284d1/jetified-audience-network-sdk-5.1.1/AndroidManifest.xml:17:13-74
+507            android:exported="false" />
+507-->[com.facebook.android:audience-network-sdk:5.1.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/61694bedd9c940fadb3b529d326284d1/jetified-audience-network-sdk-5.1.1/AndroidManifest.xml:18:13-37
+508        <activity
+508-->[com.facebook.android:audience-network-sdk:5.1.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/61694bedd9c940fadb3b529d326284d1/jetified-audience-network-sdk-5.1.1/AndroidManifest.xml:19:9-23:39
+509            android:name="com.facebook.ads.internal.ipc.RemoteANActivity"
+509-->[com.facebook.android:audience-network-sdk:5.1.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/61694bedd9c940fadb3b529d326284d1/jetified-audience-network-sdk-5.1.1/AndroidManifest.xml:20:13-74
+510            android:configChanges="keyboardHidden|orientation|screenSize"
+510-->[com.facebook.android:audience-network-sdk:5.1.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/61694bedd9c940fadb3b529d326284d1/jetified-audience-network-sdk-5.1.1/AndroidManifest.xml:21:13-74
+511            android:exported="false"
+511-->[com.facebook.android:audience-network-sdk:5.1.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/61694bedd9c940fadb3b529d326284d1/jetified-audience-network-sdk-5.1.1/AndroidManifest.xml:22:13-37
+512            android:process=":adnw" />
+512-->[com.facebook.android:audience-network-sdk:5.1.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/61694bedd9c940fadb3b529d326284d1/jetified-audience-network-sdk-5.1.1/AndroidManifest.xml:23:13-36
+513
+514        <service
+514-->[com.facebook.android:audience-network-sdk:5.1.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/61694bedd9c940fadb3b529d326284d1/jetified-audience-network-sdk-5.1.1/AndroidManifest.xml:25:9-27:40
+515            android:name="com.facebook.ads.internal.ipc.AdsProcessPriorityService"
+515-->[com.facebook.android:audience-network-sdk:5.1.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/61694bedd9c940fadb3b529d326284d1/jetified-audience-network-sdk-5.1.1/AndroidManifest.xml:26:13-83
+516            android:exported="false" />
+516-->[com.facebook.android:audience-network-sdk:5.1.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/61694bedd9c940fadb3b529d326284d1/jetified-audience-network-sdk-5.1.1/AndroidManifest.xml:27:13-37
+517        <service
+517-->[com.facebook.android:audience-network-sdk:5.1.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/61694bedd9c940fadb3b529d326284d1/jetified-audience-network-sdk-5.1.1/AndroidManifest.xml:28:9-31:39
+518            android:name="com.facebook.ads.internal.ipc.AdsMessengerService"
+518-->[com.facebook.android:audience-network-sdk:5.1.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/61694bedd9c940fadb3b529d326284d1/jetified-audience-network-sdk-5.1.1/AndroidManifest.xml:29:13-77
+519            android:exported="false"
+519-->[com.facebook.android:audience-network-sdk:5.1.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/61694bedd9c940fadb3b529d326284d1/jetified-audience-network-sdk-5.1.1/AndroidManifest.xml:30:13-37
+520            android:process=":adnw" />
+520-->[com.facebook.android:audience-network-sdk:5.1.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/61694bedd9c940fadb3b529d326284d1/jetified-audience-network-sdk-5.1.1/AndroidManifest.xml:31:13-36
+521        <service
+521-->[com.google.android.gms:play-services-analytics:16.0.8] /Users/jonas/.gradle/caches/transforms-2/files-2.1/f412f821f4ed624127ef2f62edc1579b/jetified-play-services-analytics-16.0.8/AndroidManifest.xml:40:9-44:72
+522            android:name="com.google.android.gms.analytics.AnalyticsJobService"
+522-->[com.google.android.gms:play-services-analytics:16.0.8] /Users/jonas/.gradle/caches/transforms-2/files-2.1/f412f821f4ed624127ef2f62edc1579b/jetified-play-services-analytics-16.0.8/AndroidManifest.xml:41:13-80
+523            android:enabled="true"
+523-->[com.google.android.gms:play-services-analytics:16.0.8] /Users/jonas/.gradle/caches/transforms-2/files-2.1/f412f821f4ed624127ef2f62edc1579b/jetified-play-services-analytics-16.0.8/AndroidManifest.xml:42:13-35
+524            android:exported="false"
+524-->[com.google.android.gms:play-services-analytics:16.0.8] /Users/jonas/.gradle/caches/transforms-2/files-2.1/f412f821f4ed624127ef2f62edc1579b/jetified-play-services-analytics-16.0.8/AndroidManifest.xml:43:13-37
+525            android:permission="android.permission.BIND_JOB_SERVICE" /> <!-- Needs to be explicitly declared on P+ -->
+525-->[com.google.android.gms:play-services-analytics:16.0.8] /Users/jonas/.gradle/caches/transforms-2/files-2.1/f412f821f4ed624127ef2f62edc1579b/jetified-play-services-analytics-16.0.8/AndroidManifest.xml:44:13-69
+526        <uses-library
+526-->[com.google.android.gms:play-services-maps:16.1.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6499eebdf30ebbc8de5c15bcf0fcfa9d/jetified-play-services-maps-16.1.0/AndroidManifest.xml:33:9-35:40
+527            android:name="org.apache.http.legacy"
+527-->[com.google.android.gms:play-services-maps:16.1.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6499eebdf30ebbc8de5c15bcf0fcfa9d/jetified-play-services-maps-16.1.0/AndroidManifest.xml:34:13-50
+528            android:required="false" />
+528-->[com.google.android.gms:play-services-maps:16.1.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/6499eebdf30ebbc8de5c15bcf0fcfa9d/jetified-play-services-maps-16.1.0/AndroidManifest.xml:35:13-37
+529
+530        <activity
+530-->[com.google.android.gms:play-services-auth:16.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/a12e5927668d51a90de10d963f2603ef/jetified-play-services-auth-16.0.1/AndroidManifest.xml:23:9-27:75
+531            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+531-->[com.google.android.gms:play-services-auth:16.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/a12e5927668d51a90de10d963f2603ef/jetified-play-services-auth-16.0.1/AndroidManifest.xml:24:13-93
+532            android:excludeFromRecents="true"
+532-->[com.google.android.gms:play-services-auth:16.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/a12e5927668d51a90de10d963f2603ef/jetified-play-services-auth-16.0.1/AndroidManifest.xml:25:13-46
+533            android:exported="false"
+533-->[com.google.android.gms:play-services-auth:16.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/a12e5927668d51a90de10d963f2603ef/jetified-play-services-auth-16.0.1/AndroidManifest.xml:26:13-37
+534            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+534-->[com.google.android.gms:play-services-auth:16.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/a12e5927668d51a90de10d963f2603ef/jetified-play-services-auth-16.0.1/AndroidManifest.xml:27:13-72
+535        <!--
+536            Service handling Google Sign-In user revocation. For apps that do not integrate with
+537            Google Sign-In, this service will never be started.
+538        -->
+539        <service
+539-->[com.google.android.gms:play-services-auth:16.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/a12e5927668d51a90de10d963f2603ef/jetified-play-services-auth-16.0.1/AndroidManifest.xml:33:9-36:110
+540            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+540-->[com.google.android.gms:play-services-auth:16.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/a12e5927668d51a90de10d963f2603ef/jetified-play-services-auth-16.0.1/AndroidManifest.xml:34:13-89
+541            android:exported="true"
+541-->[com.google.android.gms:play-services-auth:16.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/a12e5927668d51a90de10d963f2603ef/jetified-play-services-auth-16.0.1/AndroidManifest.xml:35:13-36
+542            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION" />
+542-->[com.google.android.gms:play-services-auth:16.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/a12e5927668d51a90de10d963f2603ef/jetified-play-services-auth-16.0.1/AndroidManifest.xml:36:13-107
+543
+544        <activity
+544-->[net.openid:appauth:0.7.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/36928105a5c76153f44ea3e7049b70e2/jetified-appauth-0.7.1/AndroidManifest.xml:27:9-31:75
+545            android:name="net.openid.appauth.AuthorizationManagementActivity"
+545-->[net.openid:appauth:0.7.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/36928105a5c76153f44ea3e7049b70e2/jetified-appauth-0.7.1/AndroidManifest.xml:28:13-78
+546            android:exported="false"
+546-->[net.openid:appauth:0.7.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/36928105a5c76153f44ea3e7049b70e2/jetified-appauth-0.7.1/AndroidManifest.xml:29:13-37
+547            android:launchMode="singleTask"
+547-->[net.openid:appauth:0.7.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/36928105a5c76153f44ea3e7049b70e2/jetified-appauth-0.7.1/AndroidManifest.xml:30:13-44
+548            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+548-->[net.openid:appauth:0.7.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/36928105a5c76153f44ea3e7049b70e2/jetified-appauth-0.7.1/AndroidManifest.xml:31:13-72
+549
+550        <service
+550-->[io.nlopez.smartlocation:library:3.2.11] /Users/jonas/.gradle/caches/transforms-2/files-2.1/927fecac4bfafda759549cfe77d30586/jetified-library-3.2.11/AndroidManifest.xml:19:9-21:40
+551            android:name="io.nlopez.smartlocation.activity.providers.ActivityGooglePlayServicesProvider$ActivityRecognitionService"
+551-->[io.nlopez.smartlocation:library:3.2.11] /Users/jonas/.gradle/caches/transforms-2/files-2.1/927fecac4bfafda759549cfe77d30586/jetified-library-3.2.11/AndroidManifest.xml:20:13-132
+552            android:exported="false" />
+552-->[io.nlopez.smartlocation:library:3.2.11] /Users/jonas/.gradle/caches/transforms-2/files-2.1/927fecac4bfafda759549cfe77d30586/jetified-library-3.2.11/AndroidManifest.xml:21:13-37
+553        <service
+553-->[io.nlopez.smartlocation:library:3.2.11] /Users/jonas/.gradle/caches/transforms-2/files-2.1/927fecac4bfafda759549cfe77d30586/jetified-library-3.2.11/AndroidManifest.xml:22:9-24:40
+554            android:name="io.nlopez.smartlocation.geofencing.providers.GeofencingGooglePlayServicesProvider$GeofencingService"
+554-->[io.nlopez.smartlocation:library:3.2.11] /Users/jonas/.gradle/caches/transforms-2/files-2.1/927fecac4bfafda759549cfe77d30586/jetified-library-3.2.11/AndroidManifest.xml:23:13-127
+555            android:exported="false" />
+555-->[io.nlopez.smartlocation:library:3.2.11] /Users/jonas/.gradle/caches/transforms-2/files-2.1/927fecac4bfafda759549cfe77d30586/jetified-library-3.2.11/AndroidManifest.xml:24:13-37
+556        <service
+556-->[io.nlopez.smartlocation:library:3.2.11] /Users/jonas/.gradle/caches/transforms-2/files-2.1/927fecac4bfafda759549cfe77d30586/jetified-library-3.2.11/AndroidManifest.xml:25:9-27:40
+557            android:name="io.nlopez.smartlocation.geocoding.providers.AndroidGeocodingProvider$AndroidGeocodingService"
+557-->[io.nlopez.smartlocation:library:3.2.11] /Users/jonas/.gradle/caches/transforms-2/files-2.1/927fecac4bfafda759549cfe77d30586/jetified-library-3.2.11/AndroidManifest.xml:26:13-120
+558            android:exported="false" />
+558-->[io.nlopez.smartlocation:library:3.2.11] /Users/jonas/.gradle/caches/transforms-2/files-2.1/927fecac4bfafda759549cfe77d30586/jetified-library-3.2.11/AndroidManifest.xml:27:13-37
+559        <!--
+560             FirebaseMessagingService performs security checks at runtime,
+561             but set to not exported to explicitly avoid allowing another app to call it.
+562        -->
+563        <service
+563-->[com.google.firebase:firebase-messaging:18.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/1046fe7fbd8b1ce0c7e4ce6ccc8a2659/jetified-firebase-messaging-18.0.0/AndroidManifest.xml:28:9-34:19
+564            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+564-->[com.google.firebase:firebase-messaging:18.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/1046fe7fbd8b1ce0c7e4ce6ccc8a2659/jetified-firebase-messaging-18.0.0/AndroidManifest.xml:29:13-82
+565            android:exported="false" >
+565-->[com.google.firebase:firebase-messaging:18.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/1046fe7fbd8b1ce0c7e4ce6ccc8a2659/jetified-firebase-messaging-18.0.0/AndroidManifest.xml:30:13-37
+566            <intent-filter android:priority="-500" >
+566-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:308:7-310:23
+567                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+567-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:309:9-69
+567-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:309:17-67
+568            </intent-filter>
+569        </service>
+570        <service
+570-->[com.google.android.gms:play-services-measurement-api:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/c56d3126ff7e547c7d69ee7408eaf3a5/jetified-play-services-measurement-api-16.5.0/AndroidManifest.xml:27:9-33:19
+571            android:name="com.google.firebase.components.ComponentDiscoveryService"
+571-->[com.google.android.gms:play-services-measurement-api:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/c56d3126ff7e547c7d69ee7408eaf3a5/jetified-play-services-measurement-api-16.5.0/AndroidManifest.xml:28:13-84
+572            android:exported="false" >
+572-->[com.google.android.gms:play-services-measurement-api:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/c56d3126ff7e547c7d69ee7408eaf3a5/jetified-play-services-measurement-api-16.5.0/AndroidManifest.xml:29:13-37
+573            <meta-data
+573-->[com.google.android.gms:play-services-measurement-api:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/c56d3126ff7e547c7d69ee7408eaf3a5/jetified-play-services-measurement-api-16.5.0/AndroidManifest.xml:30:13-32:85
+574                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+574-->[com.google.android.gms:play-services-measurement-api:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/c56d3126ff7e547c7d69ee7408eaf3a5/jetified-play-services-measurement-api-16.5.0/AndroidManifest.xml:31:17-139
+575                android:value="com.google.firebase.components.ComponentRegistrar" />
+575-->[com.google.android.gms:play-services-measurement-api:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/c56d3126ff7e547c7d69ee7408eaf3a5/jetified-play-services-measurement-api-16.5.0/AndroidManifest.xml:32:17-82
+576            <meta-data
+576-->[com.google.firebase:firebase-iid:18.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/a486aef8d85a64a0b92f9c70d4ea500b/jetified-firebase-iid-18.0.0/AndroidManifest.xml:32:13-34:85
+577                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+577-->[com.google.firebase:firebase-iid:18.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/a486aef8d85a64a0b92f9c70d4ea500b/jetified-firebase-iid-18.0.0/AndroidManifest.xml:33:17-96
+578                android:value="com.google.firebase.components.ComponentRegistrar" />
+578-->[com.google.firebase:firebase-iid:18.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/a486aef8d85a64a0b92f9c70d4ea500b/jetified-firebase-iid-18.0.0/AndroidManifest.xml:34:17-82
+579        </service>
+580
+581        <receiver
+581-->[com.google.firebase:firebase-iid:18.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/a486aef8d85a64a0b92f9c70d4ea500b/jetified-firebase-iid-18.0.0/AndroidManifest.xml:37:9-44:20
+582            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+582-->[com.google.firebase:firebase-iid:18.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/a486aef8d85a64a0b92f9c70d4ea500b/jetified-firebase-iid-18.0.0/AndroidManifest.xml:38:13-78
+583            android:exported="true"
+583-->[com.google.firebase:firebase-iid:18.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/a486aef8d85a64a0b92f9c70d4ea500b/jetified-firebase-iid-18.0.0/AndroidManifest.xml:39:13-36
+584            android:permission="com.google.android.c2dm.permission.SEND" >
+584-->[com.google.firebase:firebase-iid:18.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/a486aef8d85a64a0b92f9c70d4ea500b/jetified-firebase-iid-18.0.0/AndroidManifest.xml:40:13-73
+585            <intent-filter>
+585-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:289:7-291:23
+586                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+586-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:279:9-72
+586-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:279:17-70
+587            </intent-filter>
+588        </receiver>
+589
+590        <activity
+590-->[com.google.android.gms:play-services-base:16.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/ba3b130c24829939dad41dffc846e514/jetified-play-services-base-16.0.1/AndroidManifest.xml:23:9-26:75
+591            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+591-->[com.google.android.gms:play-services-base:16.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/ba3b130c24829939dad41dffc846e514/jetified-play-services-base-16.0.1/AndroidManifest.xml:24:13-79
+592            android:exported="false"
+592-->[com.google.android.gms:play-services-base:16.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/ba3b130c24829939dad41dffc846e514/jetified-play-services-base-16.0.1/AndroidManifest.xml:25:13-37
+593            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+593-->[com.google.android.gms:play-services-base:16.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/ba3b130c24829939dad41dffc846e514/jetified-play-services-base-16.0.1/AndroidManifest.xml:26:13-72
+594
+595        <provider
+595-->[com.google.firebase:firebase-common:17.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/1c0f05c5fdad73184ec13a50b29359dc/jetified-firebase-common-17.0.0/AndroidManifest.xml:12:9-16:39
+596            android:name="com.google.firebase.provider.FirebaseInitProvider"
+596-->[com.google.firebase:firebase-common:17.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/1c0f05c5fdad73184ec13a50b29359dc/jetified-firebase-common-17.0.0/AndroidManifest.xml:13:13-77
+597            android:authorities="com.contactbook.contactbook.firebaseinitprovider"
+597-->[com.google.firebase:firebase-common:17.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/1c0f05c5fdad73184ec13a50b29359dc/jetified-firebase-common-17.0.0/AndroidManifest.xml:14:13-72
+598            android:exported="false"
+598-->[com.google.firebase:firebase-common:17.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/1c0f05c5fdad73184ec13a50b29359dc/jetified-firebase-common-17.0.0/AndroidManifest.xml:15:13-37
+599            android:initOrder="100" />
+599-->[com.google.firebase:firebase-common:17.0.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/1c0f05c5fdad73184ec13a50b29359dc/jetified-firebase-common-17.0.0/AndroidManifest.xml:16:13-36
+600
+601        <receiver
+601-->[com.google.android.gms:play-services-measurement:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/16427b5f1aa46de6339ab5668e291c66/jetified-play-services-measurement-16.5.0/AndroidManifest.xml:29:9-33:20
+602            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+602-->[com.google.android.gms:play-services-measurement:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/16427b5f1aa46de6339ab5668e291c66/jetified-play-services-measurement-16.5.0/AndroidManifest.xml:30:13-85
+603            android:enabled="true"
+603-->[com.google.android.gms:play-services-measurement:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/16427b5f1aa46de6339ab5668e291c66/jetified-play-services-measurement-16.5.0/AndroidManifest.xml:31:13-35
+604            android:exported="false" >
+604-->[com.google.android.gms:play-services-measurement:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/16427b5f1aa46de6339ab5668e291c66/jetified-play-services-measurement-16.5.0/AndroidManifest.xml:32:13-37
+605        </receiver>
+606        <receiver
+606-->[com.google.android.gms:play-services-measurement:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/16427b5f1aa46de6339ab5668e291c66/jetified-play-services-measurement-16.5.0/AndroidManifest.xml:34:9-42:20
+607            android:name="com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver"
+607-->[com.google.android.gms:play-services-measurement:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/16427b5f1aa46de6339ab5668e291c66/jetified-play-services-measurement-16.5.0/AndroidManifest.xml:35:13-100
+608            android:enabled="true"
+608-->[com.google.android.gms:play-services-measurement:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/16427b5f1aa46de6339ab5668e291c66/jetified-play-services-measurement-16.5.0/AndroidManifest.xml:36:13-35
+609            android:exported="true"
+609-->[com.google.android.gms:play-services-measurement:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/16427b5f1aa46de6339ab5668e291c66/jetified-play-services-measurement-16.5.0/AndroidManifest.xml:37:13-36
+610            android:permission="android.permission.INSTALL_PACKAGES" >
+610-->[com.google.android.gms:play-services-measurement:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/16427b5f1aa46de6339ab5668e291c66/jetified-play-services-measurement-16.5.0/AndroidManifest.xml:38:13-69
+611            <intent-filter>
+611-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:249:7-251:23
+612                <action android:name="com.android.vending.INSTALL_REFERRER" />
+612-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:250:9-71
+612-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:250:17-68
+613            </intent-filter>
+614        </receiver>
+615
+616        <service
+616-->[com.google.android.gms:play-services-measurement:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/16427b5f1aa46de6339ab5668e291c66/jetified-play-services-measurement-16.5.0/AndroidManifest.xml:44:9-47:40
+617            android:name="com.google.android.gms.measurement.AppMeasurementService"
+617-->[com.google.android.gms:play-services-measurement:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/16427b5f1aa46de6339ab5668e291c66/jetified-play-services-measurement-16.5.0/AndroidManifest.xml:45:13-84
+618            android:enabled="true"
+618-->[com.google.android.gms:play-services-measurement:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/16427b5f1aa46de6339ab5668e291c66/jetified-play-services-measurement-16.5.0/AndroidManifest.xml:46:13-35
+619            android:exported="false" />
+619-->[com.google.android.gms:play-services-measurement:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/16427b5f1aa46de6339ab5668e291c66/jetified-play-services-measurement-16.5.0/AndroidManifest.xml:47:13-37
+620        <service
+620-->[com.google.android.gms:play-services-measurement:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/16427b5f1aa46de6339ab5668e291c66/jetified-play-services-measurement-16.5.0/AndroidManifest.xml:48:9-52:72
+621            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+621-->[com.google.android.gms:play-services-measurement:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/16427b5f1aa46de6339ab5668e291c66/jetified-play-services-measurement-16.5.0/AndroidManifest.xml:49:13-87
+622            android:enabled="true"
+622-->[com.google.android.gms:play-services-measurement:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/16427b5f1aa46de6339ab5668e291c66/jetified-play-services-measurement-16.5.0/AndroidManifest.xml:50:13-35
+623            android:exported="false"
+623-->[com.google.android.gms:play-services-measurement:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/16427b5f1aa46de6339ab5668e291c66/jetified-play-services-measurement-16.5.0/AndroidManifest.xml:51:13-37
+624            android:permission="android.permission.BIND_JOB_SERVICE" />
+624-->[com.google.android.gms:play-services-measurement:16.5.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/16427b5f1aa46de6339ab5668e291c66/jetified-play-services-measurement-16.5.0/AndroidManifest.xml:52:13-69
+625
+626        <meta-data
+626-->[com.google.android.gms:play-services-basement:16.2.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/7bb1eeb77ddf4cd3ffed6dd14725ee10/jetified-play-services-basement-16.2.0/AndroidManifest.xml:23:9-25:69
+627            android:name="com.google.android.gms.version"
+627-->[com.google.android.gms:play-services-basement:16.2.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/7bb1eeb77ddf4cd3ffed6dd14725ee10/jetified-play-services-basement-16.2.0/AndroidManifest.xml:24:13-58
+628            android:value="@integer/google_play_services_version" />
+628-->[com.google.android.gms:play-services-basement:16.2.0] /Users/jonas/.gradle/caches/transforms-2/files-2.1/7bb1eeb77ddf4cd3ffed6dd14725ee10/jetified-play-services-basement-16.2.0/AndroidManifest.xml:25:13-66
+629        <!--
+630         The initialization ContentProvider will call FacebookSdk.sdkInitialize automatically
+631         with the application context. This config is merged in with the host app's manifest,
+632         but there can only be one provider with the same authority activated at any given
+633         point; so if the end user has two or more different apps that use Facebook SDK, only the
+634         first one will be able to use the provider. To work around this problem, we use the
+635         following placeholder in the authority to identify each host application as if it was
+636         a completely different provider.
+637        -->
+638        <provider
+638-->[com.facebook.android:facebook-core:5.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/5121a68821995e9e8136d223b81be876/jetified-facebook-core-5.0.1/AndroidManifest.xml:39:9-42:40
+639            android:name="com.facebook.internal.FacebookInitProvider"
+639-->[com.facebook.android:facebook-core:5.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/5121a68821995e9e8136d223b81be876/jetified-facebook-core-5.0.1/AndroidManifest.xml:40:13-70
+640            android:authorities="com.contactbook.contactbook.FacebookInitProvider"
+640-->[com.facebook.android:facebook-core:5.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/5121a68821995e9e8136d223b81be876/jetified-facebook-core-5.0.1/AndroidManifest.xml:41:13-72
+641            android:exported="false" />
+641-->[com.facebook.android:facebook-core:5.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/5121a68821995e9e8136d223b81be876/jetified-facebook-core-5.0.1/AndroidManifest.xml:42:13-37
+642
+643        <receiver
+643-->[com.facebook.android:facebook-core:5.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/5121a68821995e9e8136d223b81be876/jetified-facebook-core-5.0.1/AndroidManifest.xml:44:9-50:20
+644            android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver"
+644-->[com.facebook.android:facebook-core:5.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/5121a68821995e9e8136d223b81be876/jetified-facebook-core-5.0.1/AndroidManifest.xml:45:13-86
+645            android:exported="false" >
+645-->[com.facebook.android:facebook-core:5.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/5121a68821995e9e8136d223b81be876/jetified-facebook-core-5.0.1/AndroidManifest.xml:46:13-37
+646            <intent-filter>
+646-->[com.facebook.android:facebook-core:5.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/5121a68821995e9e8136d223b81be876/jetified-facebook-core-5.0.1/AndroidManifest.xml:47:13-49:29
+647                <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED" />
+647-->[com.facebook.android:facebook-core:5.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/5121a68821995e9e8136d223b81be876/jetified-facebook-core-5.0.1/AndroidManifest.xml:48:17-95
+647-->[com.facebook.android:facebook-core:5.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/5121a68821995e9e8136d223b81be876/jetified-facebook-core-5.0.1/AndroidManifest.xml:48:25-92
+648            </intent-filter>
+649        </receiver>
+650        <receiver
+650-->[com.facebook.android:facebook-core:5.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/5121a68821995e9e8136d223b81be876/jetified-facebook-core-5.0.1/AndroidManifest.xml:51:9-58:20
+651            android:name="com.facebook.CampaignTrackingReceiver"
+651-->[com.facebook.android:facebook-core:5.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/5121a68821995e9e8136d223b81be876/jetified-facebook-core-5.0.1/AndroidManifest.xml:52:13-65
+652            android:exported="true"
+652-->[com.facebook.android:facebook-core:5.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/5121a68821995e9e8136d223b81be876/jetified-facebook-core-5.0.1/AndroidManifest.xml:53:13-36
+653            android:permission="android.permission.INSTALL_PACKAGES" >
+653-->[com.facebook.android:facebook-core:5.0.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/5121a68821995e9e8136d223b81be876/jetified-facebook-core-5.0.1/AndroidManifest.xml:54:13-69
+654            <intent-filter>
+654-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:249:7-251:23
+655                <action android:name="com.android.vending.INSTALL_REFERRER" />
+655-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:250:9-71
+655-->/Users/jonas/Projects/contactbook/android/app/src/main/AndroidManifest.xml:250:17-68
+656            </intent-filter>
+657        </receiver>
+658
+659        <provider
+659-->[com.crashlytics.sdk.android:crashlytics:2.10.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/54959d9ff140a2539f0277c6906402ac/jetified-crashlytics-2.10.1/AndroidManifest.xml:19:9-23:38
+660            android:name="com.crashlytics.android.CrashlyticsInitProvider"
+660-->[com.crashlytics.sdk.android:crashlytics:2.10.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/54959d9ff140a2539f0277c6906402ac/jetified-crashlytics-2.10.1/AndroidManifest.xml:20:13-75
+661            android:authorities="com.contactbook.contactbook.crashlyticsinitprovider"
+661-->[com.crashlytics.sdk.android:crashlytics:2.10.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/54959d9ff140a2539f0277c6906402ac/jetified-crashlytics-2.10.1/AndroidManifest.xml:21:13-75
+662            android:exported="false"
+662-->[com.crashlytics.sdk.android:crashlytics:2.10.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/54959d9ff140a2539f0277c6906402ac/jetified-crashlytics-2.10.1/AndroidManifest.xml:22:13-37
+663            android:initOrder="90" />
+663-->[com.crashlytics.sdk.android:crashlytics:2.10.1] /Users/jonas/.gradle/caches/transforms-2/files-2.1/54959d9ff140a2539f0277c6906402ac/jetified-crashlytics-2.10.1/AndroidManifest.xml:23:13-35
+664    </application>
+665
+666</manifest>
