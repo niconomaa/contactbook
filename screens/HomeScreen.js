@@ -3,7 +3,7 @@ import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
 // import * as Contacts from 'expo-contacts';
-import { selectContactPhone } from 'react-native-select-contact';
+// import { selectContactPhone } from 'react-native-select-contact';
 
 
 import { MonoText } from '../components/StyledText';
@@ -29,22 +29,22 @@ export default function HomeScreen() {
   //   })();
   // }, []);
 
-  React.useEffect(() => {
-   console.log(getPhoneNumber());
-  }, []);
+  // React.useEffect(() => {
+  //  getPhoneNumber();
+  // }, []);
 
-  function getPhoneNumber() {
-    return selectContactPhone()
-        .then(selection => {
-            if (!selection) {
-                return null;
-            }
+  // function getPhoneNumber() {
+  //   return selectContactPhone()
+  //       .then(selection => {
+  //           if (!selection) {
+  //               return null;
+  //           }
             
-            let { contact, selectedPhone } = selection;
-            console.log(`Selected ${selectedPhone.type} phone number ${selectedPhone.number} from ${contact.name}`);
-            return selectedPhone.number;
-        });  
-}
+  //           let { contact, selectedPhone } = selection;
+  //           console.log(`Selected ${selectedPhone.type} phone number ${selectedPhone.number} from ${contact.name}`);
+  //           return selectedPhone.number;
+  //       });  
+  // }
 
   
   return (
