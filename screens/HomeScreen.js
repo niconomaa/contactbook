@@ -1,14 +1,39 @@
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
+import * as SMS from 'expo-sms';
 
 import { MonoText } from '../components/StyledText';
 
+// this is what we can use to send SMS messages to "invite" contacts to the app
+async function sendSMS() {
+  const isAvailable = await SMS.isAvailableAsync();
+  if (isAvailable) {
+    const { result } = await SMS.sendSMSAsync(
+      ['‭+49 177 1909084‬'],
+      'Hallo, YoNas hat gesagt, er hatte heute Kontakt mit Dir. Damit wir Dich informieren können, wenn sich jemand in Deinem Umfeld infiziert hat, melde Dich bitte bei Kontakt-Buch an.'
+    );
+  } else {
+    // misfortune... there's no SMS available on this device
+  }
+}
+
 export default function HomeScreen() {
+  sendSMS();
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+      >
         <View style={styles.welcomeContainer}>
           <Text>TEST</Text>
         </View>
@@ -16,29 +41,42 @@ export default function HomeScreen() {
         <View style={styles.getStartedContainer}>
           <DevelopmentModeNotice />
 
-          <Text style={styles.getStartedText}>Open up the code for this screen:</Text>
+          <Text style={styles.getStartedText}>
+            Open up the code for this screen:
+          </Text>
 
-          <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
+          <View
+            style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
+          >
             <MonoText>screens/HomeScreen.js</MonoText>
           </View>
 
           <Text style={styles.getStartedText}>
-            Change any of the text, save the file, and your app will automatically reload.
+            Change any of the text, save the file, and your app will
+            automatically reload.
           </Text>
         </View>
 
         <View style={styles.helpContainer}>
           <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
+            <Text style={styles.helpLinkText}>
+              Help, it didn’t automatically reload!
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
 
       <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
+        <Text style={styles.tabBarInfoText}>
+          This is a tab bar. You can edit it in:
+        </Text>
 
-        <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</MonoText>
+        <View
+          style={[styles.codeHighlightContainer, styles.navigationFilename]}
+        >
+          <MonoText style={styles.codeHighlightText}>
+            navigation/BottomTabNavigator.js
+          </MonoText>
         </View>
       </View>
     </View>
@@ -59,8 +97,8 @@ function DevelopmentModeNotice() {
 
     return (
       <Text style={styles.developmentModeText}>
-        Development mode is enabled: your app will be slower but you can use useful development
-        tools. {learnMoreButton}
+        Development mode is enabled: your app will be slower but you can use
+        useful development tools. {learnMoreButton}
       </Text>
     );
   } else {
@@ -73,7 +111,9 @@ function DevelopmentModeNotice() {
 }
 
 function handleLearnMorePress() {
-  WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/workflow/development-mode/');
+  WebBrowser.openBrowserAsync(
+    'https://docs.expo.io/versions/latest/workflow/development-mode/'
+  );
 }
 
 function handleHelpPress() {

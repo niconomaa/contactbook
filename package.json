@@ -22,6 +22,7 @@
     "expo-asset": "~8.0.0",
     "expo-constants": "~8.0.0",
     "expo-font": "~8.0.0",
+    "expo-sms": "~8.0.0",
     "expo-web-browser": "~8.0.0",
     "native-base": "^2.13.12",
     "react": "~16.9.0",
