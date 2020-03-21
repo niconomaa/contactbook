@@ -12,6 +12,19 @@ import * as WebBrowser from 'expo-web-browser';
 import * as SMS from 'expo-sms';
 
 import { MonoText } from '../components/StyledText';
+import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
+
+
+// sample gql request
+const EXCHANGE_RATES = gql`
+  {
+    rates(currency: "USD") {
+      currency
+      rate
+    }
+  }
+`;
 
 // this is what we can use to send SMS messages to "invite" contacts to the app
 async function sendSMS() {
@@ -27,6 +40,7 @@ async function sendSMS() {
 }
 
 export default function HomeScreen() {
+  const { loading, error, data } = useQuery(EXCHANGE_RATES);
   sendSMS();
   return (
     <View style={styles.container}>
