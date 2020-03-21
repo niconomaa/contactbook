@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, PermissionsAndroid, Button } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
 // import * as Contacts from 'expo-contacts';
-// import { selectContactPhone } from 'react-native-select-contact';
+import { selectContactPhone } from 'react-native-select-contact';
 
 
 import { MonoText } from '../components/StyledText';
@@ -29,22 +29,54 @@ export default function HomeScreen() {
   //   })();
   // }, []);
 
-  // React.useEffect(() => {
-  //  getPhoneNumber();
-  // }, []);
+  let onAdd = () => {
+    requestContactsPermission();
+    console.log(hasContactPermissions);
+    if(hasContactPermissions){
+      getPhoneNumber();
+    }
+  };
 
-  // function getPhoneNumber() {
-  //   return selectContactPhone()
-  //       .then(selection => {
-  //           if (!selection) {
-  //               return null;
-  //           }
+  async function requestContactsPermission() {
+    if (Platform.OS === 'android'){
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+          {
+            title: 'Contactbook Contacts Permission',
+            message:
+              'Contactbook needs access to your contacts ' +
+              'so you can add them to your contactlist.',
+            buttonNeutral: 'Ask Me Later',
+            buttonNegative: 'Cancel',
+            buttonPositive: 'OK',
+          },
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          setContactPermissions(true);
+        } else {
+          setContactPermissions(false);
+        }
+      } catch (err) {
+        console.warn(err);
+      }
+    } else {
+      setContactPermissions(true);
+    }
+  }
+
+  function getPhoneNumber() {
+    return selectContactPhone()
+        .then(selection => {
+            if (!selection) {
+                return null;
+            }
             
-  //           let { contact, selectedPhone } = selection;
-  //           console.log(`Selected ${selectedPhone.type} phone number ${selectedPhone.number} from ${contact.name}`);
-  //           return selectedPhone.number;
-  //       });  
-  // }
+            let { contact, selectedPhone } = selection;
+            console.log(`Selected ${selectedPhone.type} phone number ${selectedPhone.number} from ${contact.name}`);
+            return selectedPhone.number;
+        });  
+  }
 
   
   return (
@@ -53,6 +85,12 @@ export default function HomeScreen() {
 
         <View style={styles.welcomeContainer}>
           <Text>TEST</Text>
+          <Button 
+            title="Kontaktperson hinzufügen"
+            color="#f194ff"
+            onPress={onAdd}>
+
+          </Button>
         </View>
 
         <View style={styles.getStartedContainer}>

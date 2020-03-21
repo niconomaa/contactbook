@@ -94,6 +94,11 @@ PODS:
   - JKBigInteger2 (0.0.5)
   - lottie-ios (2.5.3)
   - RCTRequired (0.61.4)
+  - RCTSelectContact (1.3.1):
+    - RCTSelectContact/Core (= 1.3.1)
+    - React
+  - RCTSelectContact/Core (1.3.1):
+    - React
   - RCTTypeSafety (0.61.4):
     - FBLazyVector (= 0.61.4)
     - Folly (= 2018.10.22.00)
@@ -327,6 +332,7 @@ DEPENDENCIES:
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
+  - RCTSelectContact (from `../node_modules/react-native-select-contact`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
   - React-Core (from `../node_modules/react-native/`)
@@ -423,6 +429,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   RCTRequired:
     :path: "../node_modules/react-native/Libraries/RCTRequired"
+  RCTSelectContact:
+    :path: "../node_modules/react-native-select-contact"
   RCTTypeSafety:
     :path: "../node_modules/react-native/Libraries/TypeSafety"
   React:
@@ -531,6 +539,7 @@ SPEC CHECKSUMS:
   JKBigInteger2: e91672035c42328c48b7dd015b66812ddf40ca9b
   lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
   RCTRequired: f3b3fb6f4723e8e52facb229d0c75fdc76773849
+  RCTSelectContact: 072c402b2f81682bf25bf5d9a88a5ec999610f3b
   RCTTypeSafety: 2ec60de6abb1db050b56ecc4b60188026078fd10
   React: 10e0130b57e55a7cd8c3dee37c1261102ce295f4
   React-Core: 636212410772d05f3a1eb79d965df2962ca1c70b
@@ -563,6 +572,6 @@ SPEC CHECKSUMS:
   UMTaskManagerInterface: a98e37a576a5220bf43b8faf33cfdc129d2f441d
   Yoga: ba3d99dbee6c15ea6bbe3783d1f0cb1ffb79af0f
 
-PODFILE CHECKSUM: d900002c43d4c338de06821a063517665f3c6477
+PODFILE CHECKSUM: 4a3482cdfebe866a578905f8ac962112be6eaf04
 
 COCOAPODS: 1.9.1

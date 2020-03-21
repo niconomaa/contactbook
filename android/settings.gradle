@@ -1,4 +1,6 @@
 include ':app'
+include ':react-native-select-contact'
+project(':react-native-select-contact').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-select-contact/android/app')
 
 
 // Import gradle helpers for unimodules.

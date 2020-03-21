@@ -5647,10 +5647,10 @@ react-native-screens@2.0.0-alpha.12:
   dependencies:
     debounce "^1.2.0"
 
-react-native-select-contact@^1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/react-native-select-contact/-/react-native-select-contact-1.3.1.tgz#e20015ff4b6fb6af6722965bc2dc7afe2ee1c5ce"
-  integrity sha512-/lhFl7oYKbMcvbeU0sqRvZ5APoGTqjyPGgJdKQXnuGAm6wt0hCqB/j5N0p9QIXMygBkIQXfIRrWxQU7mleBMig==
+react-native-select-contact@1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-select-contact/-/react-native-select-contact-1.3.0.tgz#47836239c064b6f1b352f7b666c51b9155742b67"
+  integrity sha512-olPiF6o7sVoC1xQtrL7uAjuSmHyOQc1Y+P+xSBa2MoFzrE5HIZM5gAA6GrFgxO6ByhmDJZQLGak1UOOPl68otg==
   optionalDependencies:
     react-native-action-sheet "^2.2.0"
 
