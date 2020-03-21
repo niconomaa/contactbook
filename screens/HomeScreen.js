@@ -14,6 +14,8 @@ import * as WebBrowser from 'expo-web-browser';
 // import * as Contacts from 'expo-contacts';
 import { selectContactPhone } from 'react-native-select-contact';
 
+import { useTranslation } from 'react-i18next';
+
 import * as SMS from 'expo-sms';
 
 import { MonoText } from '../components/StyledText';
@@ -72,11 +74,12 @@ async function sendSMS() {
 }
 
 export default function HomeScreen() {
+  const { t, i18n } = useTranslation();
 
   [contacts, setContacts] = React.useState([]);
 
   let onAdd = () => {
-    hasContactPermissions = requestContactsPermission();
+    let hasContactPermissions = requestContactsPermission();
     console.log(hasContactPermissions);
     if(hasContactPermissions){
       getPhoneNumber();
@@ -131,6 +134,9 @@ export default function HomeScreen() {
   console.log(data);
   return (
     <View style={styles.container}>
+
+      <Text>{t('hello')}</Text>
+      
       {/* <Text>{data}</Text> */}
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
 

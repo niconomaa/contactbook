@@ -1,4 +1,8 @@
 import * as React from 'react';
+
+import i18next from 'i18next';
+import { initReactI18next, useTranslation } from 'react-i18next';
+
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { SplashScreen } from 'expo';
 import * as Font from 'expo-font';
@@ -13,7 +17,6 @@ import useLinking from './navigation/useLinking';
 const Stack = createStackNavigator();
 console.ignoredYellowBox = ['Warning: Each', 'Warning: Failed'];
 
-
 import ApolloClient from 'apollo-boost';
 
 const client = new ApolloClient({
@@ -22,8 +25,47 @@ const client = new ApolloClient({
   uri: "http://<IP>:4000/",
 });
 
+const languageDetector = {
+  type: 'languageDetector',
+  async: true,
+  detect: cb => cb('en'),
+  init: () => {},
+  cacheUserLanguage: () => {},
+};
+
+i18next
+  .use(languageDetector)
+  .use(initReactI18next)
+  .init({
+    fallbackLng: 'en',
+    debug: true,
+    resources: {
+      en: {
+        translation: {
+          appName: 'Contact Book',
+          hello: 'Hello world',
+          change: 'Change language',
+          navigationTabs: {
+            contacts: 'Contacts',
+          },
+        },
+      },
+      de: {
+        translation: {
+          appName: 'Kontakt-Buch',
+          hello: 'Hallo Welt',
+          change: 'Sprache ändern',
+          navigationTabs: {
+            contacts: 'Kontakte',
+          },
+        },
+      },
+    },
+  });
+
 
 export default function App(props) {
+  const { t } = useTranslation();
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
   const [initialNavigationState, setInitialNavigationState] = React.useState();
   const containerRef = React.useRef();
@@ -67,7 +109,7 @@ export default function App(props) {
             initialState={initialNavigationState}
           >
             <Stack.Navigator>
-              <Stack.Screen name="Root" component={BottomTabNavigator} />
+              <Stack.Screen name={t('appName')} component={BottomTabNavigator} />
             </Stack.Navigator>
           </NavigationContainer>
         </View>
