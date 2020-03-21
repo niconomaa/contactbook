@@ -73,11 +73,10 @@ async function sendSMS() {
 
 export default function HomeScreen() {
 
-  [hasContactPermissions, setContactPermissions] = React.useState(false);
   [contacts, setContacts] = React.useState([]);
 
   let onAdd = () => {
-    requestContactsPermission();
+    hasContactPermissions = requestContactsPermission();
     console.log(hasContactPermissions);
     if(hasContactPermissions){
       getPhoneNumber();
@@ -100,15 +99,15 @@ export default function HomeScreen() {
           },
         );
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          setContactPermissions(true);
+          return true;
         } else {
-          setContactPermissions(false);
+          return false;
         }
       } catch (err) {
         console.warn(err);
       }
     } else {
-      setContactPermissions(true);
+      return true;
     }
   }
 

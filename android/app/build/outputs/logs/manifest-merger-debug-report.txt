@@ -18,6 +18,7 @@ MERGED from [:expo-keep-awake] /Users/jonas/Projects/contactbook/node_modules/ex
 MERGED from [:expo-linear-gradient] /Users/jonas/Projects/contactbook/node_modules/expo-linear-gradient/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:expo-location] /Users/jonas/Projects/contactbook/node_modules/expo-location/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-21:12
 MERGED from [:expo-permissions] /Users/jonas/Projects/contactbook/node_modules/expo-permissions/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:expo-sms] /Users/jonas/Projects/contactbook/node_modules/expo-sms/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:expo-sqlite] /Users/jonas/Projects/contactbook/node_modules/expo-sqlite/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:expo-web-browser] /Users/jonas/Projects/contactbook/node_modules/expo-web-browser/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:unimodules-barcode-scanner-interface] /Users/jonas/Projects/contactbook/node_modules/unimodules-barcode-scanner-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
@@ -968,6 +969,8 @@ MERGED from [:expo-location] /Users/jonas/Projects/contactbook/node_modules/expo
 MERGED from [:expo-location] /Users/jonas/Projects/contactbook/node_modules/expo-location/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:expo-permissions] /Users/jonas/Projects/contactbook/node_modules/expo-permissions/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:expo-permissions] /Users/jonas/Projects/contactbook/node_modules/expo-permissions/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-sms] /Users/jonas/Projects/contactbook/node_modules/expo-sms/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-sms] /Users/jonas/Projects/contactbook/node_modules/expo-sms/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:expo-sqlite] /Users/jonas/Projects/contactbook/node_modules/expo-sqlite/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:expo-sqlite] /Users/jonas/Projects/contactbook/node_modules/expo-sqlite/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:expo-web-browser] /Users/jonas/Projects/contactbook/node_modules/expo-web-browser/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
