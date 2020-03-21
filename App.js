@@ -18,8 +18,10 @@ import ApolloClient from 'apollo-boost';
 
 const client = new ApolloClient({
   // uri: 'https://48p1r2roz4.sse.codesandbox.io',
-  uri: "",
+  // uri: "https://localhost:4000",
+  uri: "http://<IP>:4000/",
 });
+
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);

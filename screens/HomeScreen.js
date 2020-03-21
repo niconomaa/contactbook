@@ -15,13 +15,40 @@ import { MonoText } from '../components/StyledText';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 
-
-// sample gql request
-const EXCHANGE_RATES = gql`
+const GET_MYSELF = gql`
   {
-    rates(currency: "USD") {
-      currency
-      rate
+    me {
+      id
+      phoneNumber
+      infected
+      contactedPersons {
+        id
+      }
+    }
+  }
+`;
+
+const MARK_AS_INFECTED = gql`
+  mutation markMeAsInfected {
+    markMeAsInfected {
+      id
+      infected
+    }
+  }
+`;
+
+const ADD_NEW_CONTACT_PERSON = gql`
+  mutation addNewContactPerson($phNr: String!) {
+    addNewContactPerson(phoneNumber: $phNr) {
+      id
+    }
+  }
+`;
+
+const ADD_MYSELF = gql`
+  mutation addNewPerson($phNr: String!) {
+    addPerson(phoneNumber: $phNr) {
+      id
     }
   }
 `;
@@ -40,10 +67,15 @@ async function sendSMS() {
 }
 
 export default function HomeScreen() {
-  const { loading, error, data } = useQuery(EXCHANGE_RATES);
-  sendSMS();
+  // sendSMS();
+  const { loadingMyself, error, data } = useQuery(GET_MYSELF);
+
+  if (loadingMyself) return <Text>loading</Text>;
+  console.log(data);
+
   return (
     <View style={styles.container}>
+      {/* <Text>{data}</Text> */}
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
