@@ -1,3 +1,5 @@
+For the backend part of this project see [here](https://github.com/niconomaa/contactbook_back)
+
 # contactbook 🦠
 You're infected!
 
