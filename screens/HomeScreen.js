@@ -37,6 +37,13 @@ const GET_MYSELF = gql`
   }
 `;
 
+const GET_STREAK = gql`
+  query getStreak($uid: String!) {
+    streak(uid: $uid) 
+  }
+`;
+
+
 const MARK_AS_INFECTED = gql`
   mutation markMeAsInfected($uid: String!) {
     markMeAsInfected(uid: $uid) {
@@ -69,6 +76,7 @@ const ADD_MYSELF = gql`
     }
   }
 `;
+
 
 // this is what we can use to send SMS messages to "invite" contacts to the app
 // async function sendSMS() {
@@ -160,6 +168,14 @@ export default function HomeScreen() {
     if (error) return <Text>error</Text>;
   }
 
+  function getStreak(uid) {
+    const { loading, error, data: getMyselfResponse } = useQuery(GET_STREAK, {
+      variables: { uid },
+    });
+    if (loading) return <Text>loading</Text>;
+    if (error) return <Text>error</Text>;
+  }
+
   if (contacts && contacts.length > 0) {
     warnings = [
       {
@@ -179,6 +195,8 @@ export default function HomeScreen() {
     ];
   }
 
+  console.log("render");
+
   //TODO RETRIES!
   setTimeout(() => {
     setAlerts([
@@ -187,7 +205,7 @@ export default function HomeScreen() {
         value: 2,
       },
     ]);
-  }, 5500);
+  }, 1000);
 
   let headlineStyle;
   let headlineText = t("contacts.headline.wellDone");
