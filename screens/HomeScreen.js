@@ -227,6 +227,17 @@ export default function HomeScreen() {
     ];
   }
 
+    //TODO RETRIES!
+    setTimeout(() => {
+      setAlerts([
+        {
+          type: "infectionInNthDegreeInNetwork",
+          value: 1,
+        },
+      ]);
+    }, 2000);
+  
+
   let headlineStyle;
   let headlineText = t("contacts.headline.wellDone");
   if (alerts.length > 0) {
