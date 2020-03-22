@@ -9,6 +9,7 @@ import {
   PermissionsAndroid,
   Button
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
 // import * as Contacts from 'expo-contacts';
@@ -81,12 +82,20 @@ export default function HomeScreen() {
   const { t, i18n } = useTranslation();
 
   [contacts, setContacts] = React.useState([]);
+  [alerts, setAlerts] = React.useState([]);
+  [achievements, setAchievements] = React.useState([]);
+  [warnings, setWarnings] = React.useState([]);
 
-  let onAdd = () => {
+  console.log(contacts);
+
+  let onAdd = async () => {
     let hasContactPermissions = requestContactsPermission();
     console.log(hasContactPermissions);
     if(hasContactPermissions){
-      getPhoneNumber();
+      const newContactPhoneNumber = await getPhoneNumber();
+      if (newContactPhoneNumber) {
+        setContacts((existingContacts) => [...existingContacts, newContactPhoneNumber]);
+      }
     }
   };
 
@@ -118,17 +127,16 @@ export default function HomeScreen() {
     }
   }
 
-  function getPhoneNumber() {
-    return selectContactPhone()
-        .then(selection => {
-            if (!selection) {
-                return null;
-            }
-
-            let { contact, selectedPhone } = selection;
-            console.log(`Selected ${selectedPhone.type} phone number ${selectedPhone.number} from ${contact.name}`);
-            return selectedPhone.number;
-        });
+  async function getPhoneNumber() {
+    return new Promise(async (resolve, reject) => {
+      const selection = await selectContactPhone();
+      if (!selection) {
+        return resolve(null);
+      }
+      let { contact, selectedPhone } = selection;
+      console.log(`Selected ${selectedPhone.type} phone number ${selectedPhone.number} from ${contact.name}`);
+      return resolve(selectedPhone.number);
+    });
   }
 
   //GET_MYSELF
@@ -146,16 +154,152 @@ export default function HomeScreen() {
   //GET_MYSELF
   //getMyself('116b6326b44d4faaaca11db6078fe376');
 
+  if (contacts && contacts.length > 0) {
+    warnings = [
+      {
+        type: "contactsToday",
+        value: contacts.length,
+      }
+    ];
+  } else {
+    achievements = [
+      {
+        type: "noneToday",
+      },
+      {
+        type: "noIncreaseStreak",
+        value: 3,
+      }
+    ];
+  }
+
+  setTimeout(() => {
+    setAlerts([
+      {
+        type: "infectionInNthDegreeInNetwork",
+        value: 2,
+      },
+    ]);
+  }, 2500);
+
+  let headlineStyle;
+  let headlineText = t("contacts.headline.wellDone");
+  if (alerts.length > 0) {
+    headlineText = t("contacts.headline.alert");
+    headlineStyle = styles.colorRed;
+  } else {
+    if (warnings.length > 0) {
+      headlineText = t("contacts.headline.stayCautious");
+    }
+  }
+
+  if (loadingMyself) return <Text>loading</Text>;
+  console.log(data);
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <Text style={[styles.navbarTitle, {marginBottom: 20}, headlineStyle]}>{headlineText}</Text>
+        {
+          (achievements.length > 0 || warnings.length > 0 || alerts.length > 0) && 
+          (
+            <View style={styles.statiContainer}>
+            {
+              alerts.length > 0 && alerts.map(alert => {
+                let text;
+                let iconString;
+                let circleString;
+                switch (alert.type) {
+                  case "infectionInNthDegreeInNetwork":
+                    text = t("contacts.alerts.infectionInNthDegreeInNetwork", {degreeString: t(`util.infectionDegree.${alert.value}`)});
+                    circleString = "!";
+                    break;
+                }
+                return (
+                  <View key={alert.type} style={styles.statusContainer}>
+                    <View style={[styles.statusIconCircle, styles.statusIconCircleFilledRed]}>
+                      {
+                        iconString
+                        ? <Ionicons style={styles.statusIcon} name={iconString} size={25}/>
+                        : <Text style={[styles.title2, {color: "#fff"}]}>{circleString}</Text>
+                      }
+                    </View>
+                    <View>
+                      <Text style={[styles.statusText, styles.callout, styles.semibold, styles.colorRed]}>{text}</Text>
+                      <Button title={t("contacts.alerts.showMoreInformation")}></Button>
+                    </View>
+                  </View>
+                );
+              })
+            }
+            {
+              achievements.length > 0 && achievements.map(achievement => {
+                let text;
+                let iconString;
+                let circleString;
+                switch (achievement.type) {
+                  case "noneToday":
+                    text = t("contacts.achievements.noneToday");
+                    iconString = (Platform.OS === 'android') ? "md-heart" : "ios-heart";
+                    break;
+                  case "noIncreaseStreak":
+                    text = t("contacts.achievements.noIncreaseStreak", {count: achievement.value});
+                    circleString = `${achievement.value}`;
+                    break;
+                }
+                return (
+                  <View key={achievement.type} style={styles.statusContainer}>
+                    <View style={styles.statusIconCircle}>
+                      {
+                        iconString
+                        ? <Ionicons style={styles.statusIcon} name={iconString} size={25}/>
+                        : <Text style={[styles.title2]}>{circleString}</Text>
+                      }
+                    </View>
+                    <Text style={[styles.statusText, styles.callout, styles.semibold]}>{text}</Text>
+                  </View>
+                );
+              })
+            }
+            {
+              warnings.length > 0 && warnings.map(warning => {
+                let text;
+                let iconString;
+                let circleString;
+                switch (warning.type) {
+                  case "contactsToday":
+                    text = t("contacts.warnings.contactsToday", {count: warning.value});
+                    circleString = "!";
+                    break;
+                }
+                return (
+                  <View key={warning.type} style={styles.statusContainer}>
+                    <View style={[styles.statusIconCircle, styles.statusIconCircleFilled]}>
+                      {
+                        iconString
+                        ? <Ionicons style={styles.statusIcon} name={iconString} size={25}/>
+                        : <Text style={[styles.title2, {color: "#fff"}]}>{circleString}</Text>
+                      }
+                    </View>
+                    <Text style={[styles.statusText, styles.callout, styles.semibold]}>{text}</Text>
+                  </View>
+                );
+              })
+            }
+          </View>
+        )
+        }
         <Text style={[styles.title1, {marginBottom: 15}]}>{t('contacts.contactsToday.headline')}</Text>
         <Button
           title={t("contacts.addNewContactPerson")}
           onPress={onAdd}>
         ></Button>
+        
+        {/*
         <Text style={[styles.subheadline, styles.secondary, styles.centerHorizontally, {marginTop: 10}]}>{t('contacts.contactsToday.selectFromPreviousSeparator')}</Text>
         <Text style={[styles.subheadline, styles.secondary, {marginTop: 15}]}>{t('contacts.contactsToday.selectFromPrevious')}</Text>
+        <Text style={[styles.subheadline, styles.secondary, {marginTop: 15, marginBottom: 5}]}>{t('contacts.contactsToday.selectFromPrevious')}</Text>
+        {(contacts && contacts.length > 0) ? contacts.map(contact => (<Text style={[{marginBottom: 5}]} key={contact}>{contact}</Text>)) : <Text style={[styles.secondary, styles.italic]}>None yet</Text>}
+        */}
 
         <View style={styles.welcomeContainer}>
           <Button
@@ -234,6 +378,44 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     backgroundColor: '#fff',
   },
+  colorRed: {
+    color: "#FF0000",
+  },
+  statiContainer: {
+    marginBottom: 15,
+  },
+  statusContainer: {
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+    marginBottom: 15,
+  },
+  statusIconCircle: {
+    textAlign: "center",
+    margin: 5,
+    width: 40,
+    height: 40,
+    borderRadius: 40/2,
+    borderColor: "#000",
+    borderWidth: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  statusIconCircleFilled: {
+    backgroundColor: "#000",
+  },
+  statusIconCircleFilledRed: {
+    backgroundColor: "#FF0000",
+    borderColor: "#FF0000",
+  },
+  statusIcon: {
+    paddingTop: 4,
+  },
+  statusText: {
+    padding: 5,
+    paddingLeft: 10,
+    flexShrink: 1,
+  },
   developmentModeText: {
     marginBottom: 20,
     color: 'rgba(0,0,0,0.4)',
@@ -277,6 +459,15 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     textAlign: 'center',
   },
+  navbarTitle: {
+    fontFamily: 'SFProDisplay-Bold',
+    fontWeight: '700',
+    fontSize: 34,
+    color: '#000000',
+    lineHeight: 41,
+    letterSpacing: 0.37,
+    textAlign: 'left',
+  },
   title1: {
     fontFamily: 'SFProDisplay-Regular',
     fontWeight: '400',
@@ -284,6 +475,15 @@ const styles = StyleSheet.create({
     color: '#000000',
     lineHeight: 34,
     letterSpacing: 0.36,
+    textAlign: 'left',
+  },
+  title2: {
+    fontFamily: 'SFProDisplay-Regular',
+    fontWeight: '400',
+    fontSize: 22,
+    color: '#000000',
+    lineHeight: 28,
+    letterSpacing: 0.35,
     textAlign: 'left',
   },
   subheadline: {
@@ -295,9 +495,25 @@ const styles = StyleSheet.create({
     color: '#000000',
     textAlign: 'left',
   },
+  callout: {
+    fontFamily: 'SFProText-Regular',
+    fontWeight: '400',
+    fontSize: 16,
+    lineHeight: 21,
+    letterSpacing: -0.32,
+    color: '#000000',
+    textAlign: 'left',
+  },
   secondary: {
     color: '#3C3C43',
     opacity: 0.6,
+  },
+  italic: {
+    fontStyle: "italic",
+  },
+  semibold: {
+    fontFamily: 'SFProText-Semibold',
+    fontWeight: '600',
   },
   centerHorizontally: {
     textAlign: 'center',
