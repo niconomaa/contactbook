@@ -2527,6 +2527,16 @@ cross-spawn@^6.0.0, cross-spawn@^6.0.5:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
+crypto-js@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.0.0.tgz#2904ab2677a9d042856a2ea2ef80de92e4a36dcc"
+  integrity sha512-bzHZN8Pn+gS7DQA6n+iUmBfl0hO5DJq++QP3U6uTucDtk/0iGpXd/Gg7CGR0p8tJhofJyaKoWBuJI4eAO00BBg==
+
+crypto@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/crypto/-/crypto-1.0.1.tgz#2af1b7cad8175d24c8a1b0778255794a21803037"
+  integrity sha512-VxBKmeNcqQdiUQUW2Tzq0t377b54N2bMtXO/qiLa+6eRRmmC4qT3D4OnTGoT/U6O9aklQ/jTwbOtRMTTY8G0Ig==
+
 css-in-js-utils@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/css-in-js-utils/-/css-in-js-utils-2.0.1.tgz#3b472b398787291b47cfe3e44fecfdd9e914ba99"
@@ -4329,6 +4339,11 @@ jetifier@^1.6.2:
   resolved "https://registry.yarnpkg.com/jetifier/-/jetifier-1.6.5.tgz#ea87324a4230bef20a9651178ecab978ee54a8cb"
   integrity sha512-T7yzBSu9PR+DqjYt+I0KVO1XTb1QhAfHnXV5Nd3xpbXM6Xg4e3vP60Q4qkNU8Fh6PHC2PivPUNN3rY7G2MxcDQ==
 
+js-sha256@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/js-sha256/-/js-sha256-0.9.0.tgz#0b89ac166583e91ef9123644bd3c5334ce9d0966"
+  integrity sha512-sga3MHh9sgQN2+pJ9VYZ+1LPwXOxuBJBA5nrR5/ofPfuiJBE2hnjsaN8se8JznOmGLN2p49Pe5U/ttafcs/apA==
+
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -5789,6 +5804,11 @@ react-native-gesture-handler@~1.5.0:
     invariant "^2.2.4"
     prop-types "^15.7.2"
 
+react-native-hash@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/react-native-hash/-/react-native-hash-1.2.4.tgz#ad79200ea13a38cce32729fb73a591cd5a343887"
+  integrity sha512-/1o/ODe1beviXEMPKfcm6eprXe629DBF4u1+wlxzkTFDW+AYYe79Gsl8L/uak8hQyDUD7UR4hbdfIVBYvTO5vQ==
+
 react-native-iphone-x-helper@^1.0.3, react-native-iphone-x-helper@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.1.tgz#645e2ffbbb49e80844bb4cbbe34a126fda1e6772"
@@ -5820,6 +5840,11 @@ react-native-select-contact@1.3.0:
   integrity sha512-olPiF6o7sVoC1xQtrL7uAjuSmHyOQc1Y+P+xSBa2MoFzrE5HIZM5gAA6GrFgxO6ByhmDJZQLGak1UOOPl68otg==
   optionalDependencies:
     react-native-action-sheet "^2.2.0"
+
+react-native-sha256@^1.3.6:
+  version "1.3.6"
+  resolved "https://registry.yarnpkg.com/react-native-sha256/-/react-native-sha256-1.3.6.tgz#980cf3d44b1793871f32e17ddcbd8848b7be370f"
+  integrity sha512-uS77ZQn9Z1l7ZYbZkxDsS8oP8VhO0pXqC3Os0rI7HLYG2PUiThMg/sbjskzsl3KZ2Cfvw9mA7RE86hHxGQ63QA==
 
 react-native-unimodules@^0.7.0:
   version "0.7.0"

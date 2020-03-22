@@ -13,15 +13,16 @@ import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
 // import * as Contacts from 'expo-contacts';
 import { selectContactPhone } from 'react-native-select-contact';
-
 import * as SMS from 'expo-sms';
 
 import { MonoText } from '../components/StyledText';
 import { gql } from 'apollo-boost';
 import { useQuery, useMutation, resetApolloContext } from '@apollo/react-hooks';
+import { sha256 } from 'js-sha256';
+
 
 const GET_MYSELF = gql`
-  query findMyself($uid: String) {
+  query findMyself($uid: String!) {
     me(uid: $uid) {
       uid
       mobilePhone
@@ -41,6 +42,7 @@ const MARK_AS_INFECTED = gql`
   }
 `;
 
+// TODO test if this works, completely; formerly the wrong (own) uid was returned
 const ADD_NEW_CONTACT_PERSON = gql`
   mutation addNewContactPerson($myUid: String!, $phNr: String!) {
     addNewContactPerson(myUid: $myUid, contactMobilePhone: $phNr) {
@@ -76,6 +78,7 @@ const ADD_MYSELF = gql`
 // }
 
 export default function HomeScreen() {
+
 
   [contacts, setContacts] = React.useState([]);
 
@@ -128,20 +131,24 @@ export default function HomeScreen() {
         });
   }
 
+
   //GET_MYSELF
   function getMyself(uid) {
-    const { loading, error, data } = useQuery(GET_MYSELF, {
+    console.log("ssssss")
+    const { loading, error, getMyselfResponse } = useQuery(GET_MYSELF, {
       variables: { uid },
     });
     if (loading) return <Text>loading</Text>;
-    console.log(data);
+    if (error) return <Text>error</Text>;
+    console.log(getMyselfResponse);
   }
 
-  //const [addMyself, { data }] = useMutation(ADD_MYSELF);
-  //const [markMeAsInfected, { data }] = useMutation(MARK_AS_INFECTED);
-    const [addNewContactPerson, { data }] = useMutation(ADD_NEW_CONTACT_PERSON);
-  //GET_MYSELF
-  //getMyself('116b6326b44d4faaaca11db6078fe376');
+  getMyself('38f9c9c9fa2642c29107ceebacb9540e');
+
+
+  const [addMyself, { data: addMyselfResponse }] = useMutation(ADD_MYSELF);
+  const [markMeAsInfected, { data: markMeAsInfectedResponse }] = useMutation(MARK_AS_INFECTED);
+  const [addNewContactPerson, { data: addNewContactPersonResponse }] = useMutation(ADD_NEW_CONTACT_PERSON);
 
   return (
     <View style={styles.container}>
@@ -150,24 +157,23 @@ export default function HomeScreen() {
 
         <View style={styles.welcomeContainer}>
           <Button
-            title="Add myself!"
+            title="Add myself"
             onPress={e => {
-              addMyself({ variables: { phNr: 'SAMPLENR' } });
+              addMyself({ variables: { phNr: sha256("dsjcbsdjcbswcbjasdcbj") } });
             }}
           ></Button>
           <Button
             title="Mark me as infected!"
             onPress={e => {
-              markMeAsInfected({ variables: { uid:  '5a6024203d2f4e519c2cffd695b25f66' } });
+              markMeAsInfected({ variables: { uid: 'b5043305e6d44150a2b33452b76e8d12' } });
             }}
           ></Button>
           <Button
             title="Add a new contact person!"
             onPress={e => {
-              addNewContactPerson({ variables: {myUid:  '5a6024203d2f4e519c2cffd695b25f66' , phNr: "eeeeeeeeee"} });
+              addNewContactPerson({ variables: {myUid:  '38f9c9c9fa2642c29107ceebacb9540e' , phNr: sha256("2345676543234")} });
             }}
           ></Button>
-          <Text>TEST</Text>
           <Button
             title="Kontaktperson hinzufügen"
             color="#f194ff"
