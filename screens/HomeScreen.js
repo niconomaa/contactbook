@@ -224,22 +224,8 @@ export default function HomeScreen() {
       {
         type: "noneToday",
       },
-      {
-        type: "noIncreaseStreak",
-        value: 3,
-      }
     ];
   }
-
-  //TODO RETRIES!
-  setTimeout(() => {
-    setAlerts([
-      {
-        type: "infectionInNthDegreeInNetwork",
-        value: 2,
-      },
-    ]);
-  }, 5500);
 
   let headlineStyle;
   let headlineText = t("contacts.headline.wellDone");
@@ -399,33 +385,6 @@ export default function HomeScreen() {
         <Text style={[styles.subheadline, styles.secondary, {marginTop: 15, marginBottom: 5}]}>{t('contacts.contactsToday.selectFromPrevious')}</Text>
         {(contacts && contacts.length > 0) ? contacts.map(contact => (<Text style={[{marginBottom: 5}]} key={contact}>{contact}</Text>)) : <Text style={[styles.secondary, styles.italic]}>None yet</Text>}
         */}
-
-        <View style={styles.welcomeContainer}>
-          <Button
-            title="Add myself"
-            onPress={e => {
-              addMyself({ variables: { phNr: sha256("dsjdkkkkkkcbsdjcbswcbjasdcbj") } });
-            }}
-          ></Button>
-          <Button
-            title="Mark me as infected!"
-            onPress={e => {
-              markMeAsInfected({ variables: { uid: 'b5043305e6d44150a2b33452b76e8d12' } });
-            }}
-          ></Button>
-          <Button
-            title="Add a new contact person!"
-            onPress={e => {
-              addNewContactPerson({ variables: {myUid:  '38f9c9c9fa2642c29107ceebacb9540e' , phNr: sha256("2345676543234")} });
-            }}
-          ></Button>
-          <Button
-            title="Kontaktperson hinzufügen"
-            color="#f194ff"
-            onPress={onAdd}>
-
-          </Button>
-        </View>
       </ScrollView>
       </View>
   );
