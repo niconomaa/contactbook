@@ -192,7 +192,7 @@ export default function HomeScreen() {
       headlineText = t("contacts.headline.stayCautious");
     }
   }
-  
+
   console.log(data);
   return (
     <View style={styles.container}>
@@ -222,7 +222,7 @@ export default function HomeScreen() {
                         : <Text style={[styles.title2, {color: "#fff"}]}>{circleString}</Text>
                       }
                     </View>
-                    <View>
+                    <View style={{flex: 1}}>
                       <Text style={[styles.statusText, styles.callout, styles.semibold, styles.colorRed]}>{text}</Text>
                       <Button title={t("contacts.alerts.showMoreInformation")}></Button>
                     </View>
@@ -386,7 +386,6 @@ const styles = StyleSheet.create({
   statusContainer: {
     display: "flex",
     flexDirection: "row",
-    width: "100%",
     marginBottom: 15,
   },
   statusIconCircle: {
