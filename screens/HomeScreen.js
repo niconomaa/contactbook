@@ -18,6 +18,7 @@ import { selectContactPhone } from 'react-native-select-contact';
 import * as SecureStore from 'expo-secure-store';
 
 import { useTranslation } from 'react-i18next';
+import { parsePhoneNumberFromString } from 'libphonenumber-js'
 
 import * as SMS from 'expo-sms';
 
@@ -25,6 +26,7 @@ import { MonoText } from '../components/StyledText';
 import { gql } from 'apollo-boost';
 import { useQuery, useMutation, resetApolloContext } from '@apollo/react-hooks';
 import { sha256 } from 'js-sha256';
+import { parse } from 'graphql';
 
 
 const GET_MYSELF = gql`
@@ -126,14 +128,20 @@ export default function HomeScreen() {
   [alerts, setAlerts] = React.useState([]);
   [achievements, setAchievements] = React.useState([]);
   [warnings, setWarnings] = React.useState([]);
+  const [addMyself, { data: addMyselfResponse }] = useMutation(ADD_MYSELF);
+  const [markMeAsInfected, { data: markMeAsInfectedResponse }] = useMutation(MARK_AS_INFECTED);
+  const [addNewContactPerson, { data: addNewContactPersonResponse }] = useMutation(ADD_NEW_CONTACT_PERSON);
+
 
   let onAdd = async () => {
     let hasContactPermissions = requestContactsPermission();
-    console.log(hasContactPermissions);
     if(hasContactPermissions){
       const newContactPhoneNumber = await getPhoneNumber();
       if (newContactPhoneNumber) {
         setContacts((existingContacts) => [...existingContacts, newContactPhoneNumber]);
+        // const phoneNumber = parsePhoneNumberFromString(newContactPhoneNumber)
+        console.log(sha256(newContactPhoneNumber));
+        addNewContactPerson({ variables: {myUid:  '3c1f80aeb6d1434f9ce987b5cbed3f40' , phNr: sha256(newContactPhoneNumber)} });
       }
     }
   };
@@ -188,10 +196,21 @@ export default function HomeScreen() {
       return resolve(selectedPhone.number);
     });
   }
+  
+  //GET_MYSELF
+  function getMyself(uid) {
+    const { loading, error, data: getMyselfResponse } = useQuery(GET_MYSELF, {
+      variables: { uid },
+    });
+    if (loading) return <Text>loading</Text>;
+    if (error) return <Text>error</Text>;
+  }
 
-  const [addMyself, { data: addMyselfResponse }] = useMutation(ADD_MYSELF);
-  const [markMeAsInfected, { data: markMeAsInfectedResponse }] = useMutation(MARK_AS_INFECTED);
-  const [addNewContactPerson, { data: addNewContactPersonResponse }] = useMutation(ADD_NEW_CONTACT_PERSON);
+  
+  getMyself('38f9c9c9fa2642c29107ceebacb9540e');
+
+
+
 
   if (contacts && contacts.length > 0) {
     warnings = [
@@ -212,6 +231,7 @@ export default function HomeScreen() {
     ];
   }
 
+  //TODO RETRIES!
   setTimeout(() => {
     setAlerts([
       {
@@ -219,7 +239,7 @@ export default function HomeScreen() {
         value: 2,
       },
     ]);
-  }, 2500);
+  }, 5500);
 
   let headlineStyle;
   let headlineText = t("contacts.headline.wellDone");
@@ -384,7 +404,7 @@ export default function HomeScreen() {
           <Button
             title="Add myself"
             onPress={e => {
-              addMyself({ variables: { phNr: sha256("dsjcbsdjcbswcbjasdcbj") } });
+              addMyself({ variables: { phNr: sha256("dsjdkkkkkkcbsdjcbswcbjasdcbj") } });
             }}
           ></Button>
           <Button
