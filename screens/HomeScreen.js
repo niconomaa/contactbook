@@ -77,12 +77,16 @@ export default function HomeScreen() {
   const { t, i18n } = useTranslation();
 
   [contacts, setContacts] = React.useState([]);
+  console.log(contacts);
 
-  let onAdd = () => {
+  let onAdd = async () => {
     let hasContactPermissions = requestContactsPermission();
     console.log(hasContactPermissions);
     if(hasContactPermissions){
-      getPhoneNumber();
+      const newContactPhoneNumber = await getPhoneNumber();
+      if (newContactPhoneNumber) {
+        setContacts((existingContacts) => [...existingContacts, newContactPhoneNumber]);
+      }
     }
   };
 
@@ -114,17 +118,16 @@ export default function HomeScreen() {
     }
   }
 
-  function getPhoneNumber() {
-    return selectContactPhone()
-        .then(selection => {
-            if (!selection) {
-                return null;
-            }
-
-            let { contact, selectedPhone } = selection;
-            console.log(`Selected ${selectedPhone.type} phone number ${selectedPhone.number} from ${contact.name}`);
-            return selectedPhone.number;
-        });
+  async function getPhoneNumber() {
+    return new Promise(async (resolve, reject) => {
+      const selection = await selectContactPhone();
+      if (!selection) {
+        return resolve(null);
+      }
+      let { contact, selectedPhone } = selection;
+      console.log(`Selected ${selectedPhone.type} phone number ${selectedPhone.number} from ${contact.name}`);
+      return resolve(selectedPhone.number);
+    });
   }
 
   // sendSMS();
@@ -141,7 +144,8 @@ export default function HomeScreen() {
           onPress={onAdd}>
         ></Button>
         <Text style={[styles.subheadline, styles.secondary, styles.centerHorizontally, {marginTop: 10}]}>{t('contacts.contactsToday.selectFromPreviousSeparator')}</Text>
-        <Text style={[styles.subheadline, styles.secondary, {marginTop: 15}]}>{t('contacts.contactsToday.selectFromPrevious')}</Text>
+        <Text style={[styles.subheadline, styles.secondary, {marginTop: 15, marginBottom: 5}]}>{t('contacts.contactsToday.selectFromPrevious')}</Text>
+        {(contacts && contacts.length > 0) ? contacts.map(contact => (<Text style={[{marginBottom: 5}]} key={contact}>{contact}</Text>)) : <Text style={[styles.secondary, styles.italic]}>None yet</Text>}
       </ScrollView>
       </View>
   );
@@ -256,6 +260,9 @@ const styles = StyleSheet.create({
   secondary: {
     color: '#3C3C43',
     opacity: 0.6,
+  },
+  italic: {
+    fontStyle: "italic",
   },
   centerHorizontally: {
     textAlign: 'center',
