@@ -147,7 +147,7 @@ export default function HomeScreen() {
   //GET_MYSELF
   function getMyself(uid) {
     console.log("ssssss")
-    const { loading, error, getMyselfResponse } = useQuery(GET_MYSELF, {
+    const { loading, error, data: getMyselfResponse } = useQuery(GET_MYSELF, {
       variables: { uid },
     });
     if (loading) return <Text>loading</Text>;
@@ -155,6 +155,7 @@ export default function HomeScreen() {
     console.log(getMyselfResponse);
   }
 
+  
   getMyself('38f9c9c9fa2642c29107ceebacb9540e');
 
 
