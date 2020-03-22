@@ -176,13 +176,19 @@ export default function HomeScreen() {
 
   async function handleOwnPhoneNumberSubmit() {
     // TODO Validate phone number
-    // TODO Put phone number into standard format
-    // TODO Hash phone number
-    // TODO Send phone number to Backend for signup
-    // TODO Put UID returned by Backend into state and into AsyncStorage
-    const uid = "TODO Replace with actual value";
-    await setLoggedInUid(uid);
-    await setLoggedInUserId(uid);
+    // Format phone number
+    const phoneNumberParsed = parsePhoneNumberFromString(enteredOwnPhoneNumber, 'DE');
+    const phoneNumberInternational = phoneNumberParsed.formatInternational();
+    // Hash phone number
+    const hashedPhoneNumberInternational = sha256(phoneNumberInternational);
+    // Send phone number to Backend for signup
+    await addMyself({ variables: { phNr: hashedPhoneNumberInternational } });
+    if (addMyselfResponse) {
+      // TODO Put UID returned by Backend into state and into AsyncStorage
+      const uid = addMyselfResponse["addPerson"]["person"]["uid"];
+      await setLoggedInUid(uid);
+      await setLoggedInUserId(uid);
+    }
   }
 
   async function getPhoneNumber() {
@@ -196,7 +202,7 @@ export default function HomeScreen() {
       return resolve(selectedPhone.number);
     });
   }
-  
+
   //GET_MYSELF
   function getMyself(uid) {
     const { loading, error, data: getMyselfResponse } = useQuery(GET_MYSELF, {
