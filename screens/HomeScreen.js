@@ -134,53 +134,102 @@ export default function HomeScreen() {
   // sendSMS();
   const { loadingMyself, error, data } = useQuery(GET_MYSELF);
 
-  const achievements = [
-    {
-      type: "noneToday",
-    },
-    {
-      type: "noIncreaseStreak",
-      value: 3,
-    }
-  ];
+  let achievements = [];
+  let warnings = [];
+  let alerts = [];
+
+  if (contacts && contacts.length > 0) {
+    warnings = [
+      {
+        type: "contactsToday",
+        value: contacts.length,
+      }
+    ];
+  } else {
+    achievements = [
+      {
+        type: "noneToday",
+      },
+      {
+        type: "noIncreaseStreak",
+        value: 3,
+      }
+    ];
+  }
 
   if (loadingMyself) return <Text>loading</Text>;
   console.log(data);
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-        <Text style={[styles.navbarTitle, {marginBottom: 20}]}>{t("contacts.headline.wellDone")}</Text>
-        <View style={styles.achievementsContainer}>
+        <Text style={[styles.navbarTitle, {marginBottom: 20}]}>
           {
-            achievements.map(achievement => {
-              let text;
-              let iconString;
-              let circleString;
-              switch (achievement.type) {
-                case "noneToday":
-                  text = t("contacts.achievements.noneToday");
-                  iconString = (Platform.OS === 'android') ? "md-heart" : "ios-heart";
-                  break;
-                case "noIncreaseStreak":
-                  text = t("contacts.achievements.noIncreaseStreak", {count: achievement.value});
-                  circleString = `${achievement.value}`;
-                  break;
-              }
-              return (
-                <View style={styles.achievementContainer}>
-                  <View style={styles.achievementIconCircle}>
-                    {
-                      iconString
-                      ? <Ionicons style={styles.achievementIcon} name={iconString} size={25}/>
-                      : <Text style={[styles.title2]}>{circleString}</Text>
-                    }
-                  </View>
-                  <Text style={[styles.achievementText, styles.callout, styles.semibold]}>{text}</Text>
-                </View>
-              );
-            })
+            (contacts && contacts.length > 0)
+            ? t("contacts.headline.stayCautious")
+            : t("contacts.headline.wellDone")
           }
-        </View>
+        </Text>
+        {
+          (achievements.length > 0 || warnings.length > 0 || alerts.length > 0) && 
+          (
+            <View style={styles.statiContainer}>
+            {
+              achievements.length > 0 && achievements.map(achievement => {
+                let text;
+                let iconString;
+                let circleString;
+                switch (achievement.type) {
+                  case "noneToday":
+                    text = t("contacts.achievements.noneToday");
+                    iconString = (Platform.OS === 'android') ? "md-heart" : "ios-heart";
+                    break;
+                  case "noIncreaseStreak":
+                    text = t("contacts.achievements.noIncreaseStreak", {count: achievement.value});
+                    circleString = `${achievement.value}`;
+                    break;
+                }
+                return (
+                  <View key={achievement.type} style={styles.statusContainer}>
+                    <View style={styles.statusIconCircle}>
+                      {
+                        iconString
+                        ? <Ionicons style={styles.statusIcon} name={iconString} size={25}/>
+                        : <Text style={[styles.title2]}>{circleString}</Text>
+                      }
+                    </View>
+                    <Text style={[styles.statusText, styles.callout, styles.semibold]}>{text}</Text>
+                  </View>
+                );
+              })
+            }
+            {
+              warnings.length > 0 && warnings.map(warning => {
+                let text;
+                let iconString;
+                let circleString;
+                switch (warning.type) {
+                  case "contactsToday":
+                    text = t("contacts.warnings.contactsToday", {count: warning.value});
+                    circleString = "!";
+                    break;
+                }
+                return (
+                  <View key={warning.type} style={styles.statusContainer}>
+                    <View style={[styles.statusIconCircle, styles.statusIconCircleFilled]}>
+                      {
+                        iconString
+                        ? <Ionicons style={styles.statusIcon} name={iconString} size={25}/>
+                        : <Text style={[styles.title2, {color: "#fff"}]}>{circleString}</Text>
+                      }
+                    </View>
+                    <Text style={[styles.statusText, styles.callout, styles.semibold]}>{text}</Text>
+                  </View>
+                );
+              })
+            }
+          </View>
+        )
+        }
         <Text style={[styles.title1, {marginBottom: 15}]}>{t('contacts.contactsToday.headline')}</Text>
         <Button
           title={t("contacts.addNewContactPerson")}
@@ -239,16 +288,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     backgroundColor: '#fff',
   },
-  achievementsContainer: {
+  statiContainer: {
     marginBottom: 15,
   },
-  achievementContainer: {
+  statusContainer: {
     display: "flex",
     flexDirection: "row",
     width: "100%",
     marginBottom: 15,
   },
-  achievementIconCircle: {
+  statusIconCircle: {
     textAlign: "center",
     margin: 5,
     width: 40,
@@ -259,10 +308,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  achievementIcon: {
+  statusIconCircleFilled: {
+    backgroundColor: "#000",
+    color: "#fff",
+  },
+  statusIcon: {
     paddingTop: 4,
   },
-  achievementText: {
+  statusText: {
     padding: 5,
     paddingLeft: 10,
     flexShrink: 1,

@@ -51,6 +51,10 @@ i18next
           contacts: {
             headline: {
               wellDone: "Very good!",
+              stayCautious: "Stay cautious!",
+            },
+            warnings: {
+              contactsToday: "You already had contact with {{count}} persons today – please try to limit your contacts to the abolute minimum.",
             },
             achievements: {
               noneToday: "You haven’t entered any contact persons for today yet.",
@@ -76,6 +80,10 @@ i18next
           contacts: {
             headline: {
               wellDone: "Sehr gut!",
+              stayCautious: "Bleib vorsichtig!",
+            },
+            warnings: {
+              contactsToday: "Du hattest heute bereits mit {{count}} Personen Kontakt – bitte versuche, möglichst wenige Kontaktpersonen zu haben.",
             },
             achievements: {
               noneToday: "Du hast bisher keine Kontaktpersonen für heute eingetragen.",
