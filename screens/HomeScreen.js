@@ -15,6 +15,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
 // import * as Contacts from 'expo-contacts';
 import { selectContactPhone } from 'react-native-select-contact';
+import * as SecureStore from 'expo-secure-store';
 
 import { useTranslation } from 'react-i18next';
 
@@ -84,13 +85,21 @@ const ADD_MYSELF = gql`
 
 getLoggedInUserId = async () => {
   try {
-    const value = await AsyncStorage.getItem('@logged_in_user_id')
-    if(value !== null) {
-      return value;
+    const uid = SecureStore.getItemAsync("logged_in_user_id");
+    if(uid !== null) {
+      return uid;
     }
     return null;
   } catch(e) {
     // error reading value
+  }
+}
+
+setLoggedInUserId = async (userId) => {
+  try {
+    await SecureStore.setItemAsync("logged_in_user_id", userId);
+  } catch (e) {
+    // saving error
   }
 }
 
@@ -105,6 +114,7 @@ export default function HomeScreen() {
   // Similar to componentDidMount and componentDidUpdate:
   React.useEffect(() => {
     getLoggedInUserId().then(cachedUid => {
+      console.log(`Cached UID: ${cachedUid}`);
       if (cachedUid) {
         setLoggedInUid(cachedUid);
       }
@@ -116,8 +126,6 @@ export default function HomeScreen() {
   [alerts, setAlerts] = React.useState([]);
   [achievements, setAchievements] = React.useState([]);
   [warnings, setWarnings] = React.useState([]);
-
-  console.log(contacts);
 
   let onAdd = async () => {
     let hasContactPermissions = requestContactsPermission();
@@ -156,6 +164,17 @@ export default function HomeScreen() {
     } else {
       return true;
     }
+  }
+
+  async function handleOwnPhoneNumberSubmit() {
+    // TODO Validate phone number
+    // TODO Put phone number into standard format
+    // TODO Hash phone number
+    // TODO Send phone number to Backend for signup
+    // TODO Put UID returned by Backend into state and into AsyncStorage
+    const uid = "TODO Replace with actual value";
+    await setLoggedInUid(uid);
+    await setLoggedInUserId(uid);
   }
 
   async function getPhoneNumber() {
@@ -248,13 +267,7 @@ export default function HomeScreen() {
             style={{marginTop: 30}}
             title={t("signup.phoneNumber.submit")}
             disabled={enteredOwnPhoneNumber === undefined || enteredOwnPhoneNumber === ""}
-            onPress={() => {
-              // TODO Validate phone number
-              // TODO Put phone number into standard format
-              // TODO Hash phone number
-              // TODO Send phone number to Backend for signup
-              // TODO Put UID returned by Backend into state and into AsyncStorage
-            }}
+            onPress={handleOwnPhoneNumberSubmit}
           ></Button>
         </ScrollView>
       </View>

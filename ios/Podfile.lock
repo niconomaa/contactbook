@@ -46,6 +46,8 @@ PODS:
     - UMPermissionsInterface
     - UMReactNativeAdapter
     - UMSensorsInterface
+  - EXSecureStore (8.0.0):
+    - UMCore
   - EXSMS (8.0.0):
     - UMCore
     - UMPermissionsInterface
@@ -328,6 +330,7 @@ DEPENDENCIES:
   - EXLocation (from `../node_modules/expo-location/ios`)
   - EXPermissions (from `../node_modules/expo-permissions/ios`)
   - ExpoKit/Core (from `http://github.com/expo/expo.git`, tag `ios/2.14.6`)
+  - EXSecureStore (from `../node_modules/expo-secure-store/ios`)
   - EXSMS (from `../node_modules/expo-sms/ios`)
   - EXSQLite (from `../node_modules/expo-sqlite/ios`)
   - EXWebBrowser (from `../node_modules/expo-web-browser/ios`)
@@ -417,6 +420,9 @@ EXTERNAL SOURCES:
   ExpoKit:
     :git: http://github.com/expo/expo.git
     :tag: ios/2.14.6
+  EXSecureStore:
+    :path: !ruby/object:Pathname
+    path: "../node_modules/expo-secure-store/ios"
   EXSMS:
     :path: !ruby/object:Pathname
     path: "../node_modules/expo-sms/ios"
@@ -534,6 +540,7 @@ SPEC CHECKSUMS:
   EXLocation: 3c75d012ca92eed94d4338778d79c49d1252393a
   EXPermissions: 9bc08859a675d291e89be9a0870155c27c16ac35
   ExpoKit: 63e55980bbb7613fa54b9bfcf699e775a4b1ca87
+  EXSecureStore: 1448b90d665c9400aaaf6655fccb464da14698f6
   EXSMS: 6b67daeb76b759934f4fae68437a0132570ddb5c
   EXSQLite: 220226a354912b100dfe913f5fe6f31762c8927e
   EXWebBrowser: db32607359fb7b55b7b7b91df32dd3d8355bb3b7
