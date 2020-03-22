@@ -7,13 +7,15 @@ import {
   TouchableOpacity,
   View,
   PermissionsAndroid,
-  Button
+  Button,
+  TextInput
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
 // import * as Contacts from 'expo-contacts';
 import { selectContactPhone } from 'react-native-select-contact';
+import * as SecureStore from 'expo-secure-store';
 
 import { useTranslation } from 'react-i18next';
 import { parsePhoneNumberFromString } from 'libphonenumber-js'
@@ -91,9 +93,44 @@ const ADD_MYSELF = gql`
 //   }
 // }
 
+getLoggedInUserId = async () => {
+  try {
+    const uid = SecureStore.getItemAsync("logged_in_user_id");
+    if(uid !== null) {
+      return uid;
+    }
+    return null;
+  } catch(e) {
+    // error reading value
+  }
+}
+
+setLoggedInUserId = async (userId) => {
+  try {
+    await SecureStore.setItemAsync("logged_in_user_id", userId);
+  } catch (e) {
+    // saving error
+  }
+}
+
 export default function HomeScreen() {
   const { t, i18n } = useTranslation();
 
+  const [isLookingForCachedUid, setIsLookingForCachedUid] = React.useState(true);
+  const [loggedInUid, setLoggedInUid] = React.useState(null);
+
+  const [enteredOwnPhoneNumber, onChangeEnteredOwnPhoneNumber] = React.useState();
+
+  // Similar to componentDidMount and componentDidUpdate:
+  React.useEffect(() => {
+    getLoggedInUserId().then(cachedUid => {
+      console.log(`Cached UID: ${cachedUid}`);
+      if (cachedUid) {
+        setLoggedInUid(cachedUid);
+      }
+      setIsLookingForCachedUid(false);
+    });
+  });
 
   [contacts, setContacts] = React.useState([]);
   [alerts, setAlerts] = React.useState([]);
@@ -102,7 +139,6 @@ export default function HomeScreen() {
   const [addMyself, { data: addMyselfResponse }] = useMutation(ADD_MYSELF);
   const [markMeAsInfected, { data: markMeAsInfectedResponse }] = useMutation(MARK_AS_INFECTED);
   const [addNewContactPerson, { data: addNewContactPersonResponse }] = useMutation(ADD_NEW_CONTACT_PERSON);
-
 
 
   let onAdd = async () => {
@@ -146,6 +182,23 @@ export default function HomeScreen() {
     }
   }
 
+  async function handleOwnPhoneNumberSubmit() {
+    // TODO Validate phone number
+    // Format phone number
+    const phoneNumberParsed = parsePhoneNumberFromString(enteredOwnPhoneNumber, 'DE');
+    const phoneNumberInternational = phoneNumberParsed.formatInternational();
+    // Hash phone number
+    const hashedPhoneNumberInternational = sha256(phoneNumberInternational);
+    // Send phone number to Backend for signup
+    await addMyself({ variables: { phNr: hashedPhoneNumberInternational } });
+    if (addMyselfResponse) {
+      // TODO Put UID returned by Backend into state and into AsyncStorage
+      const uid = addMyselfResponse["addPerson"]["person"]["uid"];
+      await setLoggedInUid(uid);
+      await setLoggedInUserId(uid);
+    }
+  }
+
   async function getPhoneNumber() {
     return new Promise(async (resolve, reject) => {
       const selection = await selectContactPhone();
@@ -157,7 +210,6 @@ export default function HomeScreen() {
       return resolve(selectedPhone.number);
     });
   }
-
 
   //GET_MYSELF
   function getMyself(uid) {
@@ -216,6 +268,48 @@ export default function HomeScreen() {
     if (warnings.length > 0) {
       headlineText = t("contacts.headline.stayCautious");
     }
+  }
+
+  if (isLookingForCachedUid) {
+    return (
+      <View style={styles.container}>
+        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+          <Text style={[styles.navbarTitle, {marginBottom: 20}, headlineStyle]}>{t("Loading")}</Text>
+        </ScrollView>
+      </View>
+    );
+  }
+
+  if (!loggedInUid) {
+    return (
+      <View style={styles.container}>
+        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+          <Text style={[styles.navbarTitle, {marginBottom: 20}]}>{t("signup.heading")}</Text>
+          <Text style={[styles.subheadline, styles.secondary, {marginTop: 15}]}>{t('signup.description')}</Text>
+          <View
+            style={{marginTop: 15, marginBottom: 10}}
+          >
+            <TextInput
+              style={[styles.textInput]}
+              onChangeText={text => onChangeEnteredOwnPhoneNumber(text)}
+              value={enteredOwnPhoneNumber}
+              autoFocus
+              blurOnSubmit={false}
+              placeholder={t("signup.phoneNumber.placeholder")}
+              textContentType="telephoneNumber"
+              keyboardType="phone-pad"
+              autoCompleteType="tel"
+            />
+          </View>
+          <Button
+            style={{marginTop: 30}}
+            title={t("signup.phoneNumber.submit")}
+            disabled={enteredOwnPhoneNumber === undefined || enteredOwnPhoneNumber === ""}
+            onPress={handleOwnPhoneNumberSubmit}
+          ></Button>
+        </ScrollView>
+      </View>
+    );
   }
 
   return (
@@ -513,6 +607,15 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 20,
     letterSpacing: -0.24,
+    color: '#000000',
+    textAlign: 'left',
+  },
+  textInput: {
+    fontFamily: 'SFProText-Regular',
+    fontWeight: '400',
+    fontSize: 17,
+    lineHeight: 22,
+    letterSpacing: -0.41,
     color: '#000000',
     textAlign: 'left',
   },
