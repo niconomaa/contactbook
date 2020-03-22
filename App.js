@@ -49,6 +49,13 @@ i18next
             contacts: 'Contacts',
           },
           contacts: {
+            headline: {
+              wellDone: "Very good!",
+            },
+            achievements: {
+              noneToday: "You haven’t entered any contact persons for today yet.",
+              noIncreaseStreak: "Your amount of contact persons hasn’t increased for {{count}} days!"
+            },
             contactsToday: {
               headline: "With whom have you been in contact today?",
               selectFromPreviousSeparator: "— or —",
@@ -67,6 +74,13 @@ i18next
             contacts: 'Kontakte',
           },
           contacts: {
+            headline: {
+              wellDone: "Sehr gut!",
+            },
+            achievements: {
+              noneToday: "Du hast bisher keine Kontaktpersonen für heute eingetragen.",
+              noIncreaseStreak: "Die Zahl deiner Kontaktpersonen hat sich seit {{count}} Tagen nicht erhöht!"
+            },
             contactsToday: {
               headline: "Mit wem warst du heute in Kontakt?",
               selectFromPreviousSeparator: "— oder —",
@@ -102,7 +116,9 @@ export default function App(props) {
           'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
           'SFProDisplay-SemiboldItalic': require('./assets/fonts/SFProDisplay-SemiboldItalic.otf'),
           'SFProDisplay-Regular': require('./assets/fonts/SFProDisplay-Regular.otf'),
+          'SFProDisplay-Bold': require('./assets/fonts/SFProDisplay-Bold.otf'),
           'SFProText-Regular': require('./assets/fonts/SFProText-Regular.otf'),
+          'SFProText-Semibold': require('./assets/fonts/SFProText-Semibold.otf'),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service

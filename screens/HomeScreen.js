@@ -9,6 +9,7 @@ import {
   PermissionsAndroid,
   Button
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
 // import * as Contacts from 'expo-contacts';
@@ -133,11 +134,53 @@ export default function HomeScreen() {
   // sendSMS();
   const { loadingMyself, error, data } = useQuery(GET_MYSELF);
 
+  const achievements = [
+    {
+      type: "noneToday",
+    },
+    {
+      type: "noIncreaseStreak",
+      value: 3,
+    }
+  ];
+
   if (loadingMyself) return <Text>loading</Text>;
   console.log(data);
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <Text style={[styles.navbarTitle, {marginBottom: 20}]}>{t("contacts.headline.wellDone")}</Text>
+        <View style={styles.achievementsContainer}>
+          {
+            achievements.map(achievement => {
+              let text;
+              let iconString;
+              let circleString;
+              switch (achievement.type) {
+                case "noneToday":
+                  text = t("contacts.achievements.noneToday");
+                  iconString = (Platform.OS === 'android') ? "md-heart" : "ios-heart";
+                  break;
+                case "noIncreaseStreak":
+                  text = t("contacts.achievements.noIncreaseStreak", {count: achievement.value});
+                  circleString = `${achievement.value}`;
+                  break;
+              }
+              return (
+                <View style={styles.achievementContainer}>
+                  <View style={styles.achievementIconCircle}>
+                    {
+                      iconString
+                      ? <Ionicons style={styles.achievementIcon} name={iconString} size={25}/>
+                      : <Text style={[styles.title2]}>{circleString}</Text>
+                    }
+                  </View>
+                  <Text style={[styles.achievementText, styles.callout, styles.semibold]}>{text}</Text>
+                </View>
+              );
+            })
+          }
+        </View>
         <Text style={[styles.title1, {marginBottom: 15}]}>{t('contacts.contactsToday.headline')}</Text>
         <Button
           title={t("contacts.addNewContactPerson")}
@@ -196,6 +239,34 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     backgroundColor: '#fff',
   },
+  achievementsContainer: {
+    marginBottom: 15,
+  },
+  achievementContainer: {
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+    marginBottom: 15,
+  },
+  achievementIconCircle: {
+    textAlign: "center",
+    margin: 5,
+    width: 40,
+    height: 40,
+    borderRadius: 40/2,
+    borderColor: "#000",
+    borderWidth: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  achievementIcon: {
+    paddingTop: 4,
+  },
+  achievementText: {
+    padding: 5,
+    paddingLeft: 10,
+    flexShrink: 1,
+  },
   developmentModeText: {
     marginBottom: 20,
     color: 'rgba(0,0,0,0.4)',
@@ -239,6 +310,15 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     textAlign: 'center',
   },
+  navbarTitle: {
+    fontFamily: 'SFProDisplay-Bold',
+    fontWeight: '700',
+    fontSize: 34,
+    color: '#000000',
+    lineHeight: 41,
+    letterSpacing: 0.37,
+    textAlign: 'left',
+  },
   title1: {
     fontFamily: 'SFProDisplay-Regular',
     fontWeight: '400',
@@ -246,6 +326,15 @@ const styles = StyleSheet.create({
     color: '#000000',
     lineHeight: 34,
     letterSpacing: 0.36,
+    textAlign: 'left',
+  },
+  title2: {
+    fontFamily: 'SFProDisplay-Regular',
+    fontWeight: '400',
+    fontSize: 22,
+    color: '#000000',
+    lineHeight: 28,
+    letterSpacing: 0.35,
     textAlign: 'left',
   },
   subheadline: {
@@ -257,12 +346,25 @@ const styles = StyleSheet.create({
     color: '#000000',
     textAlign: 'left',
   },
+  callout: {
+    fontFamily: 'SFProText-Regular',
+    fontWeight: '400',
+    fontSize: 16,
+    lineHeight: 21,
+    letterSpacing: -0.32,
+    color: '#000000',
+    textAlign: 'left',
+  },
   secondary: {
     color: '#3C3C43',
     opacity: 0.6,
   },
   italic: {
     fontStyle: "italic",
+  },
+  semibold: {
+    fontFamily: 'SFProText-Semibold',
+    fontWeight: '600',
   },
   centerHorizontally: {
     textAlign: 'center',
