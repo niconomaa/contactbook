@@ -48,6 +48,15 @@ i18next
           navigationTabs: {
             contacts: 'Contacts',
           },
+          loading: "Loading …",
+          signup: {
+            heading: "Sign up",
+            description: "Please enter your phone number (it will be encrypted and stored securely).",
+            phoneNumber: {
+              placeholder: "Your telephone number",
+              submit: "Submit",
+            },
+          },
           contacts: {
             headline: {
               alert: "Alert!",
@@ -89,6 +98,15 @@ i18next
           navigationTabs: {
             contacts: 'Kontakte',
           },
+          signup: {
+            heading: "Anmeldung",
+            description: "Bitte gibt deine Handynummer an (sie wird verschlüsselt und sicher gespeichert).",
+            phoneNumber: {
+              placeholder: "Deine Telefonnummer",
+              submit: "Abschicken",
+            },
+          },
+          loading: "Wird geladen …",
           contacts: {
             headline: {
               alert: "Achtung!",

@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   View,
   PermissionsAndroid,
-  Button
+  Button,
+  TextInput
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -81,9 +82,35 @@ const ADD_MYSELF = gql`
 //   }
 // }
 
+getLoggedInUserId = async () => {
+  try {
+    const value = await AsyncStorage.getItem('@logged_in_user_id')
+    if(value !== null) {
+      return value;
+    }
+    return null;
+  } catch(e) {
+    // error reading value
+  }
+}
+
 export default function HomeScreen() {
   const { t, i18n } = useTranslation();
 
+  const [isLookingForCachedUid, setIsLookingForCachedUid] = React.useState(true);
+  const [loggedInUid, setLoggedInUid] = React.useState(null);
+
+  const [enteredOwnPhoneNumber, onChangeEnteredOwnPhoneNumber] = React.useState();
+
+  // Similar to componentDidMount and componentDidUpdate:
+  React.useEffect(() => {
+    getLoggedInUserId().then(cachedUid => {
+      if (cachedUid) {
+        setLoggedInUid(cachedUid);
+      }
+      setIsLookingForCachedUid(false);
+    });
+  });
 
   [contacts, setContacts] = React.useState([]);
   [alerts, setAlerts] = React.useState([]);
@@ -143,21 +170,6 @@ export default function HomeScreen() {
     });
   }
 
-
-  //GET_MYSELF
-  function getMyself(uid) {
-    console.log("ssssss")
-    const { loading, error, getMyselfResponse } = useQuery(GET_MYSELF, {
-      variables: { uid },
-    });
-    if (loading) return <Text>loading</Text>;
-    if (error) return <Text>error</Text>;
-    console.log(getMyselfResponse);
-  }
-
-  getMyself('38f9c9c9fa2642c29107ceebacb9540e');
-
-
   const [addMyself, { data: addMyselfResponse }] = useMutation(ADD_MYSELF);
   const [markMeAsInfected, { data: markMeAsInfectedResponse }] = useMutation(MARK_AS_INFECTED);
   const [addNewContactPerson, { data: addNewContactPersonResponse }] = useMutation(ADD_NEW_CONTACT_PERSON);
@@ -199,6 +211,54 @@ export default function HomeScreen() {
     if (warnings.length > 0) {
       headlineText = t("contacts.headline.stayCautious");
     }
+  }
+
+  if (isLookingForCachedUid) {
+    return (
+      <View style={styles.container}>
+        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+          <Text style={[styles.navbarTitle, {marginBottom: 20}, headlineStyle]}>{t("Loading")}</Text>
+        </ScrollView>
+      </View>
+    );
+  }
+
+  if (!loggedInUid) {
+    return (
+      <View style={styles.container}>
+        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+          <Text style={[styles.navbarTitle, {marginBottom: 20}]}>{t("signup.heading")}</Text>
+          <Text style={[styles.subheadline, styles.secondary, {marginTop: 15}]}>{t('signup.description')}</Text>
+          <View
+            style={{marginTop: 15, marginBottom: 10}}
+          >
+            <TextInput
+              style={[styles.textInput]}
+              onChangeText={text => onChangeEnteredOwnPhoneNumber(text)}
+              value={enteredOwnPhoneNumber}
+              autoFocus
+              blurOnSubmit={false}
+              placeholder={t("signup.phoneNumber.placeholder")}
+              textContentType="telephoneNumber"
+              keyboardType="phone-pad"
+              autoCompleteType="tel"
+            />
+          </View>
+          <Button
+            style={{marginTop: 30}}
+            title={t("signup.phoneNumber.submit")}
+            disabled={enteredOwnPhoneNumber === undefined || enteredOwnPhoneNumber === ""}
+            onPress={() => {
+              // TODO Validate phone number
+              // TODO Put phone number into standard format
+              // TODO Hash phone number
+              // TODO Send phone number to Backend for signup
+              // TODO Put UID returned by Backend into state and into AsyncStorage
+            }}
+          ></Button>
+        </ScrollView>
+      </View>
+    );
   }
 
   return (
@@ -496,6 +556,15 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 20,
     letterSpacing: -0.24,
+    color: '#000000',
+    textAlign: 'left',
+  },
+  textInput: {
+    fontFamily: 'SFProText-Regular',
+    fontWeight: '400',
+    fontSize: 17,
+    lineHeight: 22,
+    letterSpacing: -0.41,
     color: '#000000',
     textAlign: 'left',
   },
