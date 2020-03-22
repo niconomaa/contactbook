@@ -192,8 +192,7 @@ export default function HomeScreen() {
       headlineText = t("contacts.headline.stayCautious");
     }
   }
-
-  if (loadingMyself) return <Text>loading</Text>;
+  
   console.log(data);
   return (
     <View style={styles.container}>
@@ -293,7 +292,7 @@ export default function HomeScreen() {
           title={t("contacts.addNewContactPerson")}
           onPress={onAdd}>
         ></Button>
-        
+
         {/*
         <Text style={[styles.subheadline, styles.secondary, styles.centerHorizontally, {marginTop: 10}]}>{t('contacts.contactsToday.selectFromPreviousSeparator')}</Text>
         <Text style={[styles.subheadline, styles.secondary, {marginTop: 15}]}>{t('contacts.contactsToday.selectFromPrevious')}</Text>
