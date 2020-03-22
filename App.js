@@ -68,7 +68,7 @@ i18next
               infectionInNthDegreeInNetwork: "One of your contact persons in {{degreeString}} degree has been positively tested for COVID-19 in the last 14 days.",
             },
             warnings: {
-              contactsToday: "You already had contact with {{count}} persons today – please try to limit your contacts to the abolute minimum.",
+              contactsToday: "You already had contact with {{count}} persons today – please try to limit your contacts to the absolute minimum.",
             },
             achievements: {
               noneToday: "You haven’t entered any contact persons for today yet.",
