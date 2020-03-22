@@ -78,6 +78,10 @@ export default function HomeScreen() {
   const { t, i18n } = useTranslation();
 
   [contacts, setContacts] = React.useState([]);
+  [alerts, setAlerts] = React.useState([]);
+  [achievements, setAchievements] = React.useState([]);
+  [warnings, setWarnings] = React.useState([]);
+
   console.log(contacts);
 
   let onAdd = async () => {
@@ -134,10 +138,6 @@ export default function HomeScreen() {
   // sendSMS();
   const { loadingMyself, error, data } = useQuery(GET_MYSELF);
 
-  let achievements = [];
-  let warnings = [];
-  let alerts = [];
-
   if (contacts && contacts.length > 0) {
     warnings = [
       {
@@ -157,22 +157,61 @@ export default function HomeScreen() {
     ];
   }
 
+  setTimeout(() => {
+    setAlerts([
+      {
+        type: "infectionInNthDegreeInNetwork",
+        value: 2,
+      },
+    ]);
+  }, 2500);
+
+  let headlineStyle;
+  let headlineText = t("contacts.headline.wellDone");
+  if (alerts.length > 0) {
+    headlineText = t("contacts.headline.alert");
+    headlineStyle = styles.colorRed;
+  } else {
+    if (warnings.length > 0) {
+      headlineText = t("contacts.headline.stayCautious");
+    }
+  }
+
   if (loadingMyself) return <Text>loading</Text>;
   console.log(data);
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-        <Text style={[styles.navbarTitle, {marginBottom: 20}]}>
-          {
-            (contacts && contacts.length > 0)
-            ? t("contacts.headline.stayCautious")
-            : t("contacts.headline.wellDone")
-          }
-        </Text>
+        <Text style={[styles.navbarTitle, {marginBottom: 20}, headlineStyle]}>{headlineText}</Text>
         {
           (achievements.length > 0 || warnings.length > 0 || alerts.length > 0) && 
           (
             <View style={styles.statiContainer}>
+            {
+              alerts.length > 0 && alerts.map(alert => {
+                let text;
+                let iconString;
+                let circleString;
+                switch (alert.type) {
+                  case "infectionInNthDegreeInNetwork":
+                    text = t("contacts.alerts.infectionInNthDegreeInNetwork", {degreeString: t(`util.infectionDegree.${alert.value}`)});
+                    circleString = "!";
+                    break;
+                }
+                return (
+                  <View key={alert.type} style={styles.statusContainer}>
+                    <View style={[styles.statusIconCircle, styles.statusIconCircleFilledRed]}>
+                      {
+                        iconString
+                        ? <Ionicons style={styles.statusIcon} name={iconString} size={25}/>
+                        : <Text style={[styles.title2, {color: "#fff"}]}>{circleString}</Text>
+                      }
+                    </View>
+                    <Text style={[styles.statusText, styles.callout, styles.semibold, styles.colorRed]}>{text}</Text>
+                  </View>
+                );
+              })
+            }
             {
               achievements.length > 0 && achievements.map(achievement => {
                 let text;
@@ -235,9 +274,11 @@ export default function HomeScreen() {
           title={t("contacts.addNewContactPerson")}
           onPress={onAdd}>
         ></Button>
+        {/*
         <Text style={[styles.subheadline, styles.secondary, styles.centerHorizontally, {marginTop: 10}]}>{t('contacts.contactsToday.selectFromPreviousSeparator')}</Text>
         <Text style={[styles.subheadline, styles.secondary, {marginTop: 15, marginBottom: 5}]}>{t('contacts.contactsToday.selectFromPrevious')}</Text>
         {(contacts && contacts.length > 0) ? contacts.map(contact => (<Text style={[{marginBottom: 5}]} key={contact}>{contact}</Text>)) : <Text style={[styles.secondary, styles.italic]}>None yet</Text>}
+        */}
       </ScrollView>
       </View>
   );
@@ -288,6 +329,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     backgroundColor: '#fff',
   },
+  colorRed: {
+    color: "#FF0000",
+  },
   statiContainer: {
     marginBottom: 15,
   },
@@ -310,7 +354,10 @@ const styles = StyleSheet.create({
   },
   statusIconCircleFilled: {
     backgroundColor: "#000",
-    color: "#fff",
+  },
+  statusIconCircleFilledRed: {
+    backgroundColor: "#FF0000",
+    borderColor: "#FF0000",
   },
   statusIcon: {
     paddingTop: 4,

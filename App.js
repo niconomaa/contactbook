@@ -50,8 +50,12 @@ i18next
           },
           contacts: {
             headline: {
+              alert: "Alert!",
               wellDone: "Very good!",
               stayCautious: "Stay cautious!",
+            },
+            alerts: {
+              infectionInNthDegreeInNetwork: "One of your contact persons in {{degreeString}} degree has been positively tested for COVID-19 in the last 14 days.",
             },
             warnings: {
               contactsToday: "You already had contact with {{count}} persons today – please try to limit your contacts to the abolute minimum.",
@@ -66,7 +70,14 @@ i18next
               selectFromPrevious: "Choose from your last contact persons:",
             },
             addNewContactPerson: "Add new contact person"
-          }
+          },
+          util: {
+            infectionDegree: {
+              1: "1st",
+              2: "2nd",
+              3: "3rd",
+            },
+          },
         },
       },
       de: {
@@ -79,8 +90,12 @@ i18next
           },
           contacts: {
             headline: {
+              alert: "Achtung!",
               wellDone: "Sehr gut!",
               stayCautious: "Bleib vorsichtig!",
+            },
+            alerts: {
+              infectionInNthDegreeInNetwork: "Eine deiner Kontaktpersonen {{degreeString}} Grades der letzten 14 Tage wurde positiv auf COVID-19 getestet.",
             },
             warnings: {
               contactsToday: "Du hattest heute bereits mit {{count}} Personen Kontakt – bitte versuche, möglichst wenige Kontaktpersonen zu haben.",
@@ -95,7 +110,14 @@ i18next
               selectFromPrevious: "Wähle aus deinen letzten Kontaktpersonen:",
             },
             addNewContactPerson: "Neue Kontaktperson hinzufügen",
-          }
+          },
+          util: {
+            infectionDegree: {
+              1: "ersten",
+              2: "zweiten",
+              3: "dritten",
+            },
+          },
         },
       },
     },
