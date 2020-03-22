@@ -134,64 +134,16 @@ export default function HomeScreen() {
   console.log(data);
   return (
     <View style={styles.container}>
-
-      <Text>{t('hello')}</Text>
-      
-      {/* <Text>{data}</Text> */}
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-
-        <View style={styles.welcomeContainer}>
-          <Text>TEST</Text>
-          <Button
-            title="Kontaktperson hinzufügen"
-            color="#f194ff"
-            onPress={onAdd}>
-
-          </Button>
-        </View>
-
-        <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
-
-          <Text style={styles.getStartedText}>
-            Open up the code for this screen:
-          </Text>
-
-          <View
-            style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-          >
-            <MonoText>screens/HomeScreen.js</MonoText>
-          </View>
-
-          <Text style={styles.getStartedText}>
-            Change any of the text, save the file, and your app will
-            automatically reload.
-          </Text>
-        </View>
-
-        <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>
-              Help, it didn’t automatically reload!
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <Text style={[styles.title1, {marginBottom: 15}]}>{t('contacts.contactsToday.headline')}</Text>
+        <Button
+          title={t("contacts.addNewContactPerson")}
+          onPress={onAdd}>
+        ></Button>
+        <Text style={[styles.subheadline, styles.secondary, styles.centerHorizontally, {marginTop: 10}]}>{t('contacts.contactsToday.selectFromPreviousSeparator')}</Text>
+        <Text style={[styles.subheadline, styles.secondary, {marginTop: 15}]}>{t('contacts.contactsToday.selectFromPrevious')}</Text>
       </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>
-          This is a tab bar. You can edit it in:
-        </Text>
-
-        <View
-          style={[styles.codeHighlightContainer, styles.navigationFilename]}
-        >
-          <MonoText style={styles.codeHighlightText}>
-            navigation/BottomTabNavigator.js
-          </MonoText>
-        </View>
       </View>
-      </View>    
   );
 }
 
@@ -237,6 +189,7 @@ function handleHelpPress() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingHorizontal: 15,
     backgroundColor: '#fff',
   },
   developmentModeText: {
@@ -280,6 +233,31 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: 'rgba(96,100,109, 1)',
     lineHeight: 24,
+    textAlign: 'center',
+  },
+  title1: {
+    fontFamily: 'SFProDisplay-Regular',
+    fontWeight: '400',
+    fontSize: 28,
+    color: '#000000',
+    lineHeight: 34,
+    letterSpacing: 0.36,
+    textAlign: 'left',
+  },
+  subheadline: {
+    fontFamily: 'SFProText-Regular',
+    fontWeight: '400',
+    fontSize: 15,
+    lineHeight: 20,
+    letterSpacing: -0.24,
+    color: '#000000',
+    textAlign: 'left',
+  },
+  secondary: {
+    color: '#3C3C43',
+    opacity: 0.6,
+  },
+  centerHorizontally: {
     textAlign: 'center',
   },
   tabBarInfoContainer: {

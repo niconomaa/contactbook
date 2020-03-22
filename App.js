@@ -48,6 +48,14 @@ i18next
           navigationTabs: {
             contacts: 'Contacts',
           },
+          contacts: {
+            contactsToday: {
+              headline: "With whom have you been in contact today?",
+              selectFromPreviousSeparator: "— or —",
+              selectFromPrevious: "Choose from your last contact persons:",
+            },
+            addNewContactPerson: "Add new contact person"
+          }
         },
       },
       de: {
@@ -58,6 +66,14 @@ i18next
           navigationTabs: {
             contacts: 'Kontakte',
           },
+          contacts: {
+            contactsToday: {
+              headline: "Mit wem warst du heute in Kontakt?",
+              selectFromPreviousSeparator: "— oder —",
+              selectFromPrevious: "Wähle aus deinen letzten Kontaktpersonen:",
+            },
+            addNewContactPerson: "Neue Kontaktperson hinzufügen",
+          }
         },
       },
     },
@@ -84,6 +100,9 @@ export default function App(props) {
         await Font.loadAsync({
           ...Ionicons.font,
           'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
+          'SFProDisplay-SemiboldItalic': require('./assets/fonts/SFProDisplay-SemiboldItalic.otf'),
+          'SFProDisplay-Regular': require('./assets/fonts/SFProDisplay-Regular.otf'),
+          'SFProText-Regular': require('./assets/fonts/SFProText-Regular.otf'),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service
