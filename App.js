@@ -19,7 +19,7 @@ import ApolloClient from 'apollo-boost';
 const client = new ApolloClient({
   // uri: 'https://48p1r2roz4.sse.codesandbox.io',
   // uri: "https://localhost:4000",
-  uri: "http://<IP>:4000/",
+  uri: "http://192.168.178.30:8000/graphql/",
 });
 
 

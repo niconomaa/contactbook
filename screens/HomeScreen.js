@@ -18,58 +18,62 @@ import * as SMS from 'expo-sms';
 
 import { MonoText } from '../components/StyledText';
 import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useMutation, resetApolloContext } from '@apollo/react-hooks';
 
 const GET_MYSELF = gql`
-  {
-    me {
-      id
-      phoneNumber
+  query findMyself($uid: String) {
+    me(uid: $uid) {
+      uid
+      mobilePhone
       infected
-      contactedPersons {
-        id
-      }
     }
   }
 `;
 
 const MARK_AS_INFECTED = gql`
-  mutation markMeAsInfected {
-    markMeAsInfected {
-      id
+  mutation markMeAsInfected($uid: String!) {
+    markMeAsInfected(uid: $uid) {
+      person{
+      uid
       infected
+      }
     }
   }
 `;
 
 const ADD_NEW_CONTACT_PERSON = gql`
-  mutation addNewContactPerson($phNr: String!) {
-    addNewContactPerson(phoneNumber: $phNr) {
-      id
+  mutation addNewContactPerson($myUid: String!, $phNr: String!) {
+    addNewContactPerson(myUid: $myUid, contactMobilePhone: $phNr) {
+      person {
+        uid
+      }
     }
   }
 `;
 
 const ADD_MYSELF = gql`
-  mutation addNewPerson($phNr: String!) {
-    addPerson(phoneNumber: $phNr) {
-      id
+  mutation addPerson($phNr: String!) {
+    addPerson(mobilePhone: $phNr) {
+      person {
+        uid
+        mobilePhone
+      }
     }
   }
 `;
 
 // this is what we can use to send SMS messages to "invite" contacts to the app
-async function sendSMS() {
-  const isAvailable = await SMS.isAvailableAsync();
-  if (isAvailable) {
-    const { result } = await SMS.sendSMSAsync(
-      ['‭+49 177 1909084‬'],
-      'Hallo, YoNas hat gesagt, er hatte heute Kontakt mit Dir. Damit wir Dich informieren können, wenn sich jemand in Deinem Umfeld infiziert hat, melde Dich bitte bei Kontakt-Buch an.'
-    );
-  } else {
-    // misfortune... there's no SMS available on this device
-  }
-}
+// async function sendSMS() {
+//   const isAvailable = await SMS.isAvailableAsync();
+//   if (isAvailable) {
+//     const { result } = await SMS.sendSMSAsync(
+//       ['‭+49 177 1909084‬'],
+//       'Hallo, YoNas hat gesagt, er hatte heute Kontakt mit Dir. Damit wir Dich informieren können, wenn sich jemand in Deinem Umfeld infiziert hat, melde Dich bitte bei Kontakt-Buch an.'
+//     );
+//   } else {
+//     // misfortune... there's no SMS available on this device
+//   }
+// }
 
 export default function HomeScreen() {
 
@@ -125,17 +129,45 @@ export default function HomeScreen() {
         });
   }
 
-  // sendSMS();
-  const { loadingMyself, error, data } = useQuery(GET_MYSELF);
+  //GET_MYSELF
+  function getMyself(uid) {
+    const { loading, error, data } = useQuery(GET_MYSELF, {
+      variables: { uid },
+    });
+    if (loading) return <Text>loading</Text>;
+    console.log(data);
+  }
 
-  if (loadingMyself) return <Text>loading</Text>;
-  console.log(data);
+  //const [addMyself, { data }] = useMutation(ADD_MYSELF);
+  //const [markMeAsInfected, { data }] = useMutation(MARK_AS_INFECTED);
+    const [addNewContactPerson, { data }] = useMutation(ADD_NEW_CONTACT_PERSON);
+  //GET_MYSELF
+  //getMyself('116b6326b44d4faaaca11db6078fe376');
+
   return (
     <View style={styles.container}>
       {/* <Text>{data}</Text> */}
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
 
         <View style={styles.welcomeContainer}>
+          <Button
+            title="Add myself!"
+            onPress={e => {
+              addMyself({ variables: { phNr: 'SAMPLENR' } });
+            }}
+          ></Button>
+          <Button
+            title="Mark me as infected!"
+            onPress={e => {
+              markMeAsInfected({ variables: { uid:  '5a6024203d2f4e519c2cffd695b25f66' } });
+            }}
+          ></Button>
+          <Button
+            title="Add a new contact person!"
+            onPress={e => {
+              addNewContactPerson({ variables: {myUid:  '5a6024203d2f4e519c2cffd695b25f66' , phNr: "eeeeeeeeee"} });
+            }}
+          ></Button>
           <Text>TEST</Text>
           <Button
             title="Kontaktperson hinzufügen"
