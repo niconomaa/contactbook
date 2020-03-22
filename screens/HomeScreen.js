@@ -160,12 +160,6 @@ export default function HomeScreen() {
     if (error) return <Text>error</Text>;
   }
 
-  
-  getMyself('38f9c9c9fa2642c29107ceebacb9540e');
-
-
-
-
   if (contacts && contacts.length > 0) {
     warnings = [
       {
