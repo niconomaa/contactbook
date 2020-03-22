@@ -55,6 +55,7 @@ i18next
               stayCautious: "Stay cautious!",
             },
             alerts: {
+              showMoreInformation: "Learn more",
               infectionInNthDegreeInNetwork: "One of your contact persons in {{degreeString}} degree has been positively tested for COVID-19 in the last 14 days.",
             },
             warnings: {
@@ -95,6 +96,7 @@ i18next
               stayCautious: "Bleib vorsichtig!",
             },
             alerts: {
+              showMoreInformation: "Weitere Informationen anzeigen",
               infectionInNthDegreeInNetwork: "Eine deiner Kontaktpersonen {{degreeString}} Grades der letzten 14 Tage wurde positiv auf COVID-19 getestet.",
             },
             warnings: {

@@ -207,7 +207,10 @@ export default function HomeScreen() {
                         : <Text style={[styles.title2, {color: "#fff"}]}>{circleString}</Text>
                       }
                     </View>
-                    <Text style={[styles.statusText, styles.callout, styles.semibold, styles.colorRed]}>{text}</Text>
+                    <View>
+                      <Text style={[styles.statusText, styles.callout, styles.semibold, styles.colorRed]}>{text}</Text>
+                      <Button title={t("contacts.alerts.showMoreInformation")}></Button>
+                    </View>
                   </View>
                 );
               })
