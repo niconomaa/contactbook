@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
+import Diagnosis from '../screens/Diagnosis';
 import LinksScreen from '../screens/LinksScreen';
 
 const BottomTab = createBottomTabNavigator();
@@ -26,6 +27,14 @@ export default function BottomTabNavigator({ navigation, route }) {
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={(Platform.OS === 'android') ? "people" : "ios-people" } />,
         }}
       />
+      <BottomTab.Screen
+        name="Diagnosis"
+        component={Diagnosis}
+        options={{
+          title: t('navigationTabs.diagnosis'),
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={(Platform.OS === 'android') ? "md-thermometer" : "ios-thermometer" } />,
+        }}
+      />
     </BottomTab.Navigator>
   );
 }
@@ -38,7 +47,7 @@ function getHeaderTitle(route) {
   switch (routeName) {
     case 'Home':
       return t('navigationTabs.contacts');
-    case 'Links':
-      return 'Links to learn more';
+    case 'Diagnosis':
+      return t('navigationTabs.diagnosis');
   }
 }

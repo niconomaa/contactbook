@@ -19,6 +19,8 @@ console.ignoredYellowBox = ['Warning: Each', 'Warning: Failed'];
 
 import ApolloClient from 'apollo-boost';
 
+console.disableYellowBox = true;
+
 const client = new ApolloClient({
   // uri: 'https://48p1r2roz4.sse.codesandbox.io',
   // uri: "https://localhost:4000",
@@ -28,7 +30,7 @@ const client = new ApolloClient({
 const languageDetector = {
   type: 'languageDetector',
   async: true,
-  detect: cb => cb('en'),
+  detect: cb => cb('de'),
   init: () => {},
   cacheUserLanguage: () => {},
 };
@@ -37,7 +39,7 @@ i18next
   .use(languageDetector)
   .use(initReactI18next)
   .init({
-    fallbackLng: 'en',
+    fallbackLng: 'de',
     debug: true,
     resources: {
       en: {
@@ -47,6 +49,7 @@ i18next
           change: 'Change language',
           navigationTabs: {
             contacts: 'Contacts',
+            diagnosis: 'Diagnosis',
           },
           loading: "Loading …",
           signup: {
@@ -68,7 +71,7 @@ i18next
               infectionInNthDegreeInNetwork: "One of your contact persons in {{degreeString}} degree has been positively tested for COVID-19 in the last 14 days.",
             },
             warnings: {
-              contactsToday: "You already had contact with {{count}} persons today – please try to limit your contacts to the abolute minimum.",
+              contactsToday: "You already had contact with {{count}} persons today – please try to limit your contacts to the absolute minimum.",
             },
             achievements: {
               noneToday: "You haven’t entered any contact persons for today yet.",
@@ -97,6 +100,7 @@ i18next
           change: 'Sprache ändern',
           navigationTabs: {
             contacts: 'Kontakte',
+            diagnosis: 'Diagnose',
           },
           signup: {
             heading: "Anmeldung",
