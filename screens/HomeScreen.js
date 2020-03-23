@@ -45,12 +45,21 @@ const GET_STREAK = gql`
   }
 `;
 
-// TODO test if this works, completely; formerly the wrong (own) uid was returned
 const ADD_NEW_CONTACT_PERSON = gql`
   mutation addNewContactPerson($myUid: String!, $phNr: String!) {
     addNewContactPerson(myUid: $myUid, contactMobilePhone: $phNr) {
       person {
         uid
+      }
+    }
+  }
+`;
+
+const   SHOULD_I_BE_WORRIED = gql`
+  mutation shouldIBeWorried($uid: String!) {
+    shouldIBeWorried(uid: $uid) {
+      person {
+        danger
       }
     }
   }
@@ -102,6 +111,14 @@ setLoggedInUserId = async (userId) => {
   }
 }
 
+deleteLoggedInUserId = async () => {
+  try {
+    await SecureStore.deleteItemAsync("logged_in_user_id");
+  } catch (e) {
+    // saving error
+  }
+}
+
 export default function HomeScreen() {
   const { t, i18n } = useTranslation();
 
@@ -113,6 +130,7 @@ export default function HomeScreen() {
   [warnings, setWarnings] = React.useState([]);
   const [addMyself, { data: addMyselfResponse }] = useMutation(ADD_MYSELF);
   const [addNewContactPerson, { data: addNewContactPersonResponse }] = useMutation(ADD_NEW_CONTACT_PERSON);
+  const [shouldIBeWorried, { data: shouldIBeWorriedResponse }] = useMutation(SHOULD_I_BE_WORRIED);
   const [enteredOwnPhoneNumber, onChangeEnteredOwnPhoneNumber] = React.useState();
 
 
@@ -131,15 +149,7 @@ export default function HomeScreen() {
 
     // Similar to componentDidMount and componentDidUpdate:
     React.useEffect(() => {
-  // TODO RETRIES!
-  // setTimeout(() => {
-  //   setAlerts([
-  //     {
-  //       type: "infectionInNthDegreeInNetwork",
-  //       value: 2,
-  //     },
-  //   ]);
-  // }, 2000);
+    // shouldIBeWorried({ variables: {myUid: "88d6bead033d481da1bd23c787d1a94c"}});
     });
 
     const { loading, error, data: getStreakResponse } = useQuery(GET_STREAK, {
@@ -156,11 +166,19 @@ export default function HomeScreen() {
       const newContactPhoneNumber = await getPhoneNumber();
       if (newContactPhoneNumber) {
         setContacts((existingContacts) => [...existingContacts, newContactPhoneNumber]);
-        // const phoneNumber = parsePhoneNumberFromString(newContactPhoneNumber)
-        addNewContactPerson({ variables: {myUid:  '3c1f80aeb6d1434f9ce987b5cbed3f40' , phNr: sha256(newContactPhoneNumber)} });
+        let dbReturnValue = addNewContactPerson({ variables: {myUid: loggedInUid, phNr: sha256(newContactPhoneNumber)} });
+        console.log(dbReturnValue);
       }
     }
   };
+
+  let logout = async () => {
+    console.log("log out");
+    deleteLoggedInUserId();
+    setLoggedInUid(null);
+  }
+
+  console.log("shouldIBeWorried", shouldIBeWorriedResponse);
 
   async function requestContactsPermission() {
     if (Platform.OS === 'android'){
@@ -248,6 +266,16 @@ export default function HomeScreen() {
       }
     ];
   }
+
+  // //TODO RETRIES!
+  // setTimeout(() => {
+  //   setAlerts([
+  //     {
+  //       type: "infectionInNthDegreeInNetwork",
+  //       value: 2,
+  //     },
+  //   ]);
+  // }, 5500);
 
   let headlineStyle;
   let headlineText = t("contacts.headline.wellDone");
@@ -407,6 +435,21 @@ export default function HomeScreen() {
         <Text style={[styles.subheadline, styles.secondary, {marginTop: 15, marginBottom: 5}]}>{t('contacts.contactsToday.selectFromPrevious')}</Text>
         {(contacts && contacts.length > 0) ? contacts.map(contact => (<Text style={[{marginBottom: 5}]} key={contact}>{contact}</Text>)) : <Text style={[styles.secondary, styles.italic]}>None yet</Text>}
         */}
+
+        <View style={styles.welcomeContainer}>
+          <Button
+            title="logout"
+            color="#000000"
+            onPress={e => logout(e)}>
+          </Button>
+          <Button
+          title="Should I be worried (temporary button :) )"
+          onPress={() => {
+            console.log("press");
+            shouldIBeWorried({ variables: {uid: "88d6bead033d481da1bd23c787d1a94c"}});
+          }}
+        ></Button>
+        </View>
       </ScrollView>
       </View>
   );

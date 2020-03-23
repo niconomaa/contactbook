@@ -5,6 +5,7 @@ import * as WebBrowser from 'expo-web-browser';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import { gql } from 'apollo-boost';
 import { useQuery, useMutation, resetApolloContext } from '@apollo/react-hooks';
+import { sha256 } from 'js-sha256';
 
 const MARK_AS_INFECTED = gql`
   mutation markMeAsInfected($uid: String!) {
@@ -32,8 +33,11 @@ export default function DiagnosisScreen() {
         </Text>
         <Button
           title="I'm infected"
-          onPress={markMeAsInfected({ variables: {uid:  '//////////' , phNr: sha256(newContactPhoneNumber)} })
-        }
+          onPress={() => {
+            console.log("press");
+            markMeAsInfected({ variables: {uid:  '88d6bead033d481da1bd23c787d1a94c'} })} 
+          }
+          // onPress={() => {}}
         ></Button>
 
       </ScrollView>
