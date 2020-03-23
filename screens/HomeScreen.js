@@ -115,11 +115,21 @@ setLoggedInUserId = async (userId) => {
 
 export default function HomeScreen() {
   const { t, i18n } = useTranslation();
+  // let t = x => x;
 
   const [isLookingForCachedUid, setIsLookingForCachedUid] = React.useState(true);
   const [loggedInUid, setLoggedInUid] = React.useState(null);
-
+  [contacts, setContacts] = React.useState([]);
+  [streak, setStreak] = React.useState(undefined);
+  [alerts, setAlerts] = React.useState([]);
+  [achievements, setAchievements] = React.useState([]);
+  [warnings, setWarnings] = React.useState([]);
+  const [addMyself, { data: addMyselfResponse }] = useMutation(ADD_MYSELF);
+  const [markMeAsInfected, { data: markMeAsInfectedResponse }] = useMutation(MARK_AS_INFECTED);
+  const [addNewContactPerson, { data: addNewContactPersonResponse }] = useMutation(ADD_NEW_CONTACT_PERSON);
   const [enteredOwnPhoneNumber, onChangeEnteredOwnPhoneNumber] = React.useState();
+
+
 
   // Similar to componentDidMount and componentDidUpdate:
   React.useEffect(() => {
@@ -128,17 +138,31 @@ export default function HomeScreen() {
       if (cachedUid) {
         setLoggedInUid(cachedUid);
       }
+      // getStreak(loggedInUid);
       setIsLookingForCachedUid(false);
     });
   });
 
-  [contacts, setContacts] = React.useState([]);
-  [alerts, setAlerts] = React.useState([]);
-  [achievements, setAchievements] = React.useState([]);
-  [warnings, setWarnings] = React.useState([]);
-  const [addMyself, { data: addMyselfResponse }] = useMutation(ADD_MYSELF);
-  const [markMeAsInfected, { data: markMeAsInfectedResponse }] = useMutation(MARK_AS_INFECTED);
-  const [addNewContactPerson, { data: addNewContactPersonResponse }] = useMutation(ADD_NEW_CONTACT_PERSON);
+    // Similar to componentDidMount and componentDidUpdate:
+    React.useEffect(() => {
+  // TODO RETRIES!
+  // setTimeout(() => {
+  //   setAlerts([
+  //     {
+  //       type: "infectionInNthDegreeInNetwork",
+  //       value: 2,
+  //     },
+  //   ]);
+  // }, 2000);
+    });
+
+  const { loading, error, data: getStreakResponse } = useQuery(GET_STREAK, {
+    variables: { uid: loggedInUid},
+  });
+  if (loading) return <Text>loading</Text>;
+  if (error) return <Text>error</Text>;
+  // setStreak(getStreakResponse);
+  console.log("streak!", getStreakResponse);
 
 
   let onAdd = async () => {
@@ -148,7 +172,6 @@ export default function HomeScreen() {
       if (newContactPhoneNumber) {
         setContacts((existingContacts) => [...existingContacts, newContactPhoneNumber]);
         // const phoneNumber = parsePhoneNumberFromString(newContactPhoneNumber)
-        console.log(sha256(newContactPhoneNumber));
         addNewContactPerson({ variables: {myUid:  '3c1f80aeb6d1434f9ce987b5cbed3f40' , phNr: sha256(newContactPhoneNumber)} });
       }
     }
@@ -220,13 +243,6 @@ export default function HomeScreen() {
     if (error) return <Text>error</Text>;
   }
 
-  function getStreak(uid) {
-    const { loading, error, data: getMyselfResponse } = useQuery(GET_STREAK, {
-      variables: { uid },
-    });
-    if (loading) return <Text>loading</Text>;
-    if (error) return <Text>error</Text>;
-  }
 
   if (contacts && contacts.length > 0) {
     warnings = [
@@ -242,22 +258,10 @@ export default function HomeScreen() {
       },
       {
         type: "noIncreaseStreak",
-        value: 3,
+        value: getStreakResponse.streak,
       }
     ];
   }
-
-  console.log("render");
-
-  //TODO RETRIES!
-  setTimeout(() => {
-    setAlerts([
-      {
-        type: "infectionInNthDegreeInNetwork",
-        value: 2,
-      },
-    ]);
-  }, 1000);
 
   let headlineStyle;
   let headlineText = t("contacts.headline.wellDone");
@@ -311,6 +315,9 @@ export default function HomeScreen() {
       </View>
     );
   }
+
+  console.log("rendering");
+
 
   return (
     <View style={styles.container}>
