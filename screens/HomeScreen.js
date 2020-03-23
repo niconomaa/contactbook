@@ -113,6 +113,14 @@ setLoggedInUserId = async (userId) => {
   }
 }
 
+deleteLoggedInUserId = async () => {
+  try {
+    await SecureStore.deleteItemAsync("logged_in_user_id");
+  } catch (e) {
+    // saving error
+  }
+}
+
 export default function HomeScreen() {
   const { t, i18n } = useTranslation();
   // let t = x => x;
@@ -171,11 +179,17 @@ export default function HomeScreen() {
       const newContactPhoneNumber = await getPhoneNumber();
       if (newContactPhoneNumber) {
         setContacts((existingContacts) => [...existingContacts, newContactPhoneNumber]);
-        // const phoneNumber = parsePhoneNumberFromString(newContactPhoneNumber)
-        addNewContactPerson({ variables: {myUid:  '3c1f80aeb6d1434f9ce987b5cbed3f40' , phNr: sha256(newContactPhoneNumber)} });
+        let dbReturnValue = addNewContactPerson({ variables: {myUid: loggedInUid, phNr: sha256(newContactPhoneNumber)} });
+        console.log(dbReturnValue);
       }
     }
   };
+
+  let logout = async () => {
+    console.log("log out");
+    deleteLoggedInUserId();
+    setLoggedInUid(null);
+  }
 
   async function requestContactsPermission() {
     if (Platform.OS === 'android'){
@@ -262,6 +276,16 @@ export default function HomeScreen() {
       }
     ];
   }
+
+  // //TODO RETRIES!
+  // setTimeout(() => {
+  //   setAlerts([
+  //     {
+  //       type: "infectionInNthDegreeInNetwork",
+  //       value: 2,
+  //     },
+  //   ]);
+  // }, 5500);
 
   let headlineStyle;
   let headlineText = t("contacts.headline.wellDone");
@@ -426,6 +450,11 @@ export default function HomeScreen() {
         */}
 
         <View style={styles.welcomeContainer}>
+          <Button
+            title="logout"
+            color="#000000"
+            onPress={e => logout(e)}>
+          </Button>
           <Button
             title="Add myself"
             onPress={e => {
