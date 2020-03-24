@@ -15,6 +15,8 @@ import * as WebBrowser from 'expo-web-browser';
 import { selectContactPhone } from 'react-native-select-contact';
 
 import { sha256 } from 'js-sha256';
+import { parsePhoneNumberFromString } from 'libphonenumber-js'
+
 
 import { useTranslation } from 'react-i18next';
 
@@ -54,6 +56,16 @@ const MARK_AS_INFECTED = gql`
   }
 `;
 
+const   SHOULD_I_BE_WORRIED = gql`
+  mutation shouldIBeWorried($uid: String!) {
+    shouldIBeWorried(uid: $uid) {
+      person {
+        danger
+      }
+    }
+  }
+`;
+
 // TODO test if this works, completely; formerly the wrong (own) uid was returned
 const ADD_NEW_CONTACT_PERSON = gql`
   mutation addNewContactPerson($myUid: String!, $phNr: String!) {
@@ -87,22 +99,22 @@ export default function HomeScreen() {
   [alerts, setAlerts] = React.useState([]);
   [achievements, setAchievements] = React.useState([]);
   [warnings, setWarnings] = React.useState([]);
-  const [markMeAsInfected, { data: markMeAsInfectedResponse }] = useMutation(MARK_AS_INFECTED);
   const [addNewContactPerson, { data: addNewContactPersonResponse }] = useMutation(ADD_NEW_CONTACT_PERSON);
+  const [shouldIBeWorried, { data: shouldIBeWorriedResponse }] = useMutation(SHOULD_I_BE_WORRIED);
   const user = React.useContext(UserContext);
 
     // Similar to componentDidMount and componentDidUpdate:
   React.useEffect(() => {
-    // TODO RETRIES!
-    // setTimeout(() => {
-    //   setAlerts([
-    //     {
-    //       type: "infectionInNthDegreeInNetwork",
-    //       value: 2,
-    //     },
-    //   ]);
-    // }, 2000);
-  });
+    if(shouldIBeWorriedResponse){
+      console.log(shouldIBeWorriedResponse);
+      setAlerts([
+        {
+          type: "infectionInNthDegreeInNetwork",
+          value: shouldIBeWorriedResponse.shouldIBeWorried.person.danger,
+        },
+      ]);
+    }
+  }, [shouldIBeWorriedResponse]);
 
   const { loading, error, data: getStreakResponse } = useQuery(GET_STREAK, {
     variables: { uid: user.loggedInUid},
@@ -112,7 +124,6 @@ export default function HomeScreen() {
   } 
   if (error) return <Text>error</Text>;
   // setStreak(getStreakResponse);
-  console.log("streak!", getStreakResponse);
 
 
   let onAdd = async () => {
@@ -120,9 +131,12 @@ export default function HomeScreen() {
     if(hasContactPermissions){
       const newContactPhoneNumber = await getPhoneNumber();
       if (newContactPhoneNumber) {
-        setContacts((existingContacts) => [...existingContacts, newContactPhoneNumber]);
-        let dbReturnValue = addNewContactPerson({ variables: {myUid: user.loggedInUid, phNr: sha256(newContactPhoneNumber)} });
-        console.log(dbReturnValue);
+        const phoneNumberParsed = parsePhoneNumberFromString(newContactPhoneNumber, 'DE');
+        const phoneNumberInternational = phoneNumberParsed.formatInternational();
+        // Hash phone number
+        const hashedPhoneNumberInternational = sha256(phoneNumberInternational);
+        setContacts((existingContacts) => [...existingContacts, hashedPhoneNumberInternational]);
+        let dbReturnValue = addNewContactPerson({ variables: {myUid: user.loggedInUid, phNr: hashedPhoneNumberInternational} });
       }
     }
   };
@@ -325,33 +339,16 @@ export default function HomeScreen() {
 
         <View style={styles.welcomeContainer}>
           <Button
+            title="Should I be worried (temporary button :) )"
+            onPress={() => {
+              console.log("press");
+              shouldIBeWorried({ variables: {uid: user.loggedInUid}});
+            }}
+          ></Button>
+          <Button
             title="logout"
             color="#000000"
             onPress={e => user.deleteStoredUid()}>
-          </Button>
-          <Button
-            title="Add myself"
-            onPress={e => {
-              addMyself({ variables: { phNr: sha256("dsjdkkkkkkcbsdjcbswcbjasdcbj") } });
-            }}
-          ></Button>
-          <Button
-            title="Mark me as infected!"
-            onPress={e => {
-              markMeAsInfected({ variables: { uid: 'b5043305e6d44150a2b33452b76e8d12' } });
-            }}
-          ></Button>
-          <Button
-            title="Add a new contact person!"
-            onPress={e => {
-              addNewContactPerson({ variables: {myUid:  '38f9c9c9fa2642c29107ceebacb9540e' , phNr: sha256("2345676543234")} });
-            }}
-          ></Button>
-          <Button
-            title="Kontaktperson hinzufügen"
-            color="#f194ff"
-            onPress={onAdd}>
-
           </Button>
         </View>
       </ScrollView>
