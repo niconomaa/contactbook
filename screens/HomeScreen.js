@@ -1,31 +1,28 @@
 import * as React from 'react';
 import {
-  Image,
   Platform,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
   PermissionsAndroid,
   Button,
-  TextInput
 } from 'react-native';
+import { UserContext } from '../UserContext';
 import { Ionicons } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
 // import * as Contacts from 'expo-contacts';
 import { selectContactPhone } from 'react-native-select-contact';
-import * as SecureStore from 'expo-secure-store';
+
+import { sha256 } from 'js-sha256';
 
 import { useTranslation } from 'react-i18next';
-import { parsePhoneNumberFromString } from 'libphonenumber-js'
 
 import * as SMS from 'expo-sms';
 
 import { MonoText } from '../components/StyledText';
 import { gql } from 'apollo-boost';
 import { useQuery, useMutation, resetApolloContext } from '@apollo/react-hooks';
-import { sha256 } from 'js-sha256';
 import { parse } from 'graphql';
 
 
@@ -68,18 +65,6 @@ const ADD_NEW_CONTACT_PERSON = gql`
   }
 `;
 
-const ADD_MYSELF = gql`
-  mutation addPerson($phNr: String!) {
-    addPerson(mobilePhone: $phNr) {
-      person {
-        uid
-        mobilePhone
-      }
-    }
-  }
-`;
-
-
 // this is what we can use to send SMS messages to "invite" contacts to the app
 // async function sendSMS() {
 //   const isAvailable = await SMS.isAvailableAsync();
@@ -93,81 +78,38 @@ const ADD_MYSELF = gql`
 //   }
 // }
 
-getLoggedInUserId = async () => {
-  try {
-    const uid = SecureStore.getItemAsync("logged_in_user_id");
-    if(uid !== null) {
-      return uid;
-    }
-    return null;
-  } catch(e) {
-    // error reading value
-  }
-}
-
-setLoggedInUserId = async (userId) => {
-  try {
-    await SecureStore.setItemAsync("logged_in_user_id", userId);
-  } catch (e) {
-    // saving error
-  }
-}
-
-deleteLoggedInUserId = async () => {
-  try {
-    await SecureStore.deleteItemAsync("logged_in_user_id");
-  } catch (e) {
-    // saving error
-  }
-}
-
 export default function HomeScreen() {
   const { t, i18n } = useTranslation();
   // let t = x => x;
 
-  const [isLookingForCachedUid, setIsLookingForCachedUid] = React.useState(true);
-  const [loggedInUid, setLoggedInUid] = React.useState(null);
   [contacts, setContacts] = React.useState([]);
   [streak, setStreak] = React.useState(undefined);
   [alerts, setAlerts] = React.useState([]);
   [achievements, setAchievements] = React.useState([]);
   [warnings, setWarnings] = React.useState([]);
-  const [addMyself, { data: addMyselfResponse }] = useMutation(ADD_MYSELF);
   const [markMeAsInfected, { data: markMeAsInfectedResponse }] = useMutation(MARK_AS_INFECTED);
   const [addNewContactPerson, { data: addNewContactPersonResponse }] = useMutation(ADD_NEW_CONTACT_PERSON);
-  const [enteredOwnPhoneNumber, onChangeEnteredOwnPhoneNumber] = React.useState();
-
-
-
-  // Similar to componentDidMount and componentDidUpdate:
-  React.useEffect(() => {
-    getLoggedInUserId().then(cachedUid => {
-      console.log(`Cached UID: ${cachedUid}`);
-      if (cachedUid) {
-        setLoggedInUid(cachedUid);
-      }
-      // getStreak(loggedInUid);
-      setIsLookingForCachedUid(false);
-    });
-  });
+  const user = React.useContext(UserContext);
 
     // Similar to componentDidMount and componentDidUpdate:
-    React.useEffect(() => {
-  // TODO RETRIES!
-  // setTimeout(() => {
-  //   setAlerts([
-  //     {
-  //       type: "infectionInNthDegreeInNetwork",
-  //       value: 2,
-  //     },
-  //   ]);
-  // }, 2000);
-    });
+  React.useEffect(() => {
+    // TODO RETRIES!
+    // setTimeout(() => {
+    //   setAlerts([
+    //     {
+    //       type: "infectionInNthDegreeInNetwork",
+    //       value: 2,
+    //     },
+    //   ]);
+    // }, 2000);
+  });
 
   const { loading, error, data: getStreakResponse } = useQuery(GET_STREAK, {
-    variables: { uid: loggedInUid},
+    variables: { uid: user.loggedInUid},
   });
-  if (loading) return <Text>loading</Text>;
+  if (loading){
+    return <Text>loading</Text>;
+  } 
   if (error) return <Text>error</Text>;
   // setStreak(getStreakResponse);
   console.log("streak!", getStreakResponse);
@@ -179,17 +121,11 @@ export default function HomeScreen() {
       const newContactPhoneNumber = await getPhoneNumber();
       if (newContactPhoneNumber) {
         setContacts((existingContacts) => [...existingContacts, newContactPhoneNumber]);
-        let dbReturnValue = addNewContactPerson({ variables: {myUid: loggedInUid, phNr: sha256(newContactPhoneNumber)} });
+        let dbReturnValue = addNewContactPerson({ variables: {myUid: user.loggedInUid, phNr: sha256(newContactPhoneNumber)} });
         console.log(dbReturnValue);
       }
     }
   };
-
-  let logout = async () => {
-    console.log("log out");
-    deleteLoggedInUserId();
-    setLoggedInUid(null);
-  }
 
   async function requestContactsPermission() {
     if (Platform.OS === 'android'){
@@ -216,23 +152,6 @@ export default function HomeScreen() {
       }
     } else {
       return true;
-    }
-  }
-
-  async function handleOwnPhoneNumberSubmit() {
-    // TODO Validate phone number
-    // Format phone number
-    const phoneNumberParsed = parsePhoneNumberFromString(enteredOwnPhoneNumber, 'DE');
-    const phoneNumberInternational = phoneNumberParsed.formatInternational();
-    // Hash phone number
-    const hashedPhoneNumberInternational = sha256(phoneNumberInternational);
-    // Send phone number to Backend for signup
-    await addMyself({ variables: { phNr: hashedPhoneNumberInternational } });
-    if (addMyselfResponse) {
-      // TODO Put UID returned by Backend into state and into AsyncStorage
-      const uid = addMyselfResponse["addPerson"]["person"]["uid"];
-      await setLoggedInUid(uid);
-      await setLoggedInUserId(uid);
     }
   }
 
@@ -297,51 +216,6 @@ export default function HomeScreen() {
       headlineText = t("contacts.headline.stayCautious");
     }
   }
-
-  if (isLookingForCachedUid) {
-    return (
-      <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <Text style={[styles.navbarTitle, {marginBottom: 20}, headlineStyle]}>{t("Loading")}</Text>
-        </ScrollView>
-      </View>
-    );
-  }
-
-  if (!loggedInUid) {
-    return (
-      <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <Text style={[styles.navbarTitle, {marginBottom: 20}]}>{t("signup.heading")}</Text>
-          <Text style={[styles.subheadline, styles.secondary, {marginTop: 15}]}>{t('signup.description')}</Text>
-          <View
-            style={{marginTop: 15, marginBottom: 10}}
-          >
-            <TextInput
-              style={[styles.textInput]}
-              onChangeText={text => onChangeEnteredOwnPhoneNumber(text)}
-              value={enteredOwnPhoneNumber}
-              autoFocus
-              blurOnSubmit={false}
-              placeholder={t("signup.phoneNumber.placeholder")}
-              textContentType="telephoneNumber"
-              keyboardType="phone-pad"
-              autoCompleteType="tel"
-            />
-          </View>
-          <Button
-            style={{marginTop: 30}}
-            title={t("signup.phoneNumber.submit")}
-            disabled={enteredOwnPhoneNumber === undefined || enteredOwnPhoneNumber === ""}
-            onPress={handleOwnPhoneNumberSubmit}
-          ></Button>
-        </ScrollView>
-      </View>
-    );
-  }
-
-  console.log("rendering");
-
 
   return (
     <View style={styles.container}>
@@ -453,7 +327,7 @@ export default function HomeScreen() {
           <Button
             title="logout"
             color="#000000"
-            onPress={e => logout(e)}>
+            onPress={e => user.deleteStoredUid()}>
           </Button>
           <Button
             title="Add myself"
